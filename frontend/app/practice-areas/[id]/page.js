@@ -118,9 +118,9 @@ export default function PracticeAreaDetail({ params }) {
           <img
             src={area.featured_image_url}
             alt={area.name}
-            className="w-full h-full object-cover opacity-70"
+            className="w-full h-full object-cover "
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-900/90 to-transparent flex items-center">
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-900 to-transparent flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">{area.name}</h1>
               <p className="text-xl text-amber-100">Premium Legal Services</p>
@@ -298,12 +298,12 @@ export default function PracticeAreaDetail({ params }) {
             Don't handle legal matters alone. Contact our expert {area.name} team for professional guidance and representation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-amber-100 text-amber-900 hover:bg-white px-8 py-3 rounded-lg font-bold transition-colors">
-              Schedule Free Consultation
-            </button>
-            <button className="border-2 border-amber-200 text-amber-100 hover:bg-amber-800 px-8 py-3 rounded-lg font-bold transition-colors">
+            <Link href="/appointments" className="bg-amber-100 text-amber-900 hover:bg-white px-8 py-3 rounded-lg font-bold transition-colors">
+              Schedule Consultation
+            </Link>
+            <Link href="/contact" className="border-2 border-amber-200 text-amber-100 hover:bg-amber-800 px-8 py-3 rounded-lg font-bold transition-colors">
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
       </section>

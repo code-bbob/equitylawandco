@@ -2,6 +2,7 @@ from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from datetime import datetime, timedelta
 import uuid
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -156,3 +157,45 @@ class Attorney(models.Model):
     class Meta:
         verbose_name_plural = "Attorneys"
         ordering = ['order', 'full_name']
+
+
+class Blog(models.Model):
+    """Blog post model"""
+    title = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, help_text="URL-friendly identifier")
+    author = models.CharField(max_length=255, help_text="Name of the blog author")
+    featured_image = models.ImageField(upload_to='blogs/', null=True, blank=True, help_text="Featured image for the blog post")
+    excerpt = models.TextField(max_length=500, help_text="Short summary of the blog post")
+    content = CKEditor5Field(help_text="Main content of the blog post")
+    category = models.CharField(max_length=100, blank=True, help_text="Blog category/topic")
+    published_date = models.DateField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=True, help_text="Whether this blog is visible on the website")
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            slug = base_slug
+            
+            # Handle duplicates by adding a number suffix
+            counter = 1
+            while Blog.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            
+            self.slug = slug
+        
+        super().save(*args, **kwargs)
+    
+    class Meta:
+        verbose_name_plural = "Blogs"
+        ordering = ['-published_date']
+        indexes = [
+            models.Index(fields=['-published_date']),
+            models.Index(fields=['slug']),
+            models.Index(fields=['is_published']),
+        ]

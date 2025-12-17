@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PracticeArea, PracticeAreaImage, ContactMessage, Appointment, BusinessHours, Holiday, Attorney
+from .models import PracticeArea, PracticeAreaImage, ContactMessage, Appointment, BusinessHours, Holiday, Attorney, Blog
 
 class PracticeAreaImageInline(admin.TabularInline):
     model = PracticeAreaImage
@@ -127,3 +127,35 @@ admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(BusinessHours, BusinessHoursAdmin)
 admin.site.register(Holiday, HolidayAdmin)
 admin.site.register(Attorney, AttorneyAdmin)
+
+
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ['title', 'author', 'published_date', 'category', 'is_published', 'featured_image_preview']
+    list_filter = ['is_published', 'published_date', 'category', 'author']
+    search_fields = ['title', 'excerpt', 'content', 'author', 'category']
+    readonly_fields = ['id', 'slug', 'published_date', 'updated_date', 'created_at']
+    fieldsets = (
+        ('Blog Information', {
+            'fields': ('title', 'slug', 'excerpt', 'author')
+        }),
+        ('Content', {
+            'fields': ('content', 'featured_image')
+        }),
+        ('Organization', {
+            'fields': ('category', 'is_published')
+        }),
+        ('Metadata', {
+            'fields': ('id', 'published_date', 'updated_date', 'created_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    ordering = ['-published_date']
+    
+    def featured_image_preview(self, obj):
+        if obj.featured_image:
+            return '✓ Image uploaded'
+        return '✗ No image'
+    featured_image_preview.short_description = 'Featured Image'
+
+
+admin.site.register(Blog, BlogAdmin)

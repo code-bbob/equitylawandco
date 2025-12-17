@@ -25,9 +25,9 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white text-amber-900 shadow-lg sticky top-0 z-50 border-b-4 border-amber-800">
+    <nav className="bg-white text-amber-900 shadow-lg sticky top-0 z-50 border-b-2 border-amber-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between font-semibold items-center h-16">
+        <div className="flex justify-between font-semibold items-center h-24">
           {/* Logo/Brand */}
           <Link href="/" className="flex items-center space-x-2 font-bold text-xl hover:opacity-80 transition-opacity">
             <Image 
@@ -37,7 +37,7 @@ export default function Navbar() {
               height={70}
               className="object-contain"
             />
-            <span className="hidden sm:inline text-amber-900 font-bold">Equity Law & Co</span>
+            <span className="hidden sm:inline text-[var(--logo-color)] font-bold">Equity Law & Co</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -92,17 +92,18 @@ export default function Navbar() {
             <Link href="/#about" className="hover:text-blue-900 transition-colors">
               About
             </Link>
+            <Link href="/blogs" className="hover:text-blue-900 transition-colors">
+              Blogs
+            </Link>
             <Link href="/#contact" className="hover:text-blue-900 transition-colors">
               Contact
             </Link>
-             <Link href="/" className="hover:text-blue-900 transition-colors">
-              Blogs
-            </Link>
 
-
-            <button className="bg-amber-800 hover:bg-amber-900 px-6 py-2 rounded-lg ml-4 text-white transition-colors font-medium">
+            <Link href="/appointments">
+            <button className="bg-slate-400 hover:bg-amber-900 px-6 py-2 rounded-lg ml-4 text-white transition-colors font-medium">
               Get Consultation
             </button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -165,12 +166,17 @@ export default function Navbar() {
             <Link href="/#about" className="block px-4 py-2 hover:bg-slate-700 rounded-lg">
               About
             </Link>
+            <Link href="/blogs" className="block px-4 py-2 hover:bg-slate-700 rounded-lg">
+              Blogs
+            </Link>
             <Link href="/#contact" className="block px-4 py-2 hover:bg-slate-700 rounded-lg">
               Contact
             </Link>
-            <button className="w-full bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-lg transition-colors font-medium mt-2">
-              Get Consultation
-            </button>
+            <Link href="/appointments">
+              <button className="w-full bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-lg transition-colors font-medium mt-2">
+                Get Consultation
+              </button>
+            </Link>
           </div>
         )}
       </div>

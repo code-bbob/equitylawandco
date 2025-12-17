@@ -204,23 +204,23 @@ def send_appointment_confirmation_email(appointment):
                             
                             <div class="appointment-details">
                                 <div class="detail-row">
-                                    <span class="detail-label">📅 Date</span>
+                                    <span class="detail-label">📅 Date: </span>
                                     <span class="detail-value">{appointment.appointment_date.strftime('%B %d, %Y')}</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">🕐 Time</span>
+                                    <span class="detail-label">🕐 Time: </span>
                                     <span class="detail-value">{appointment.appointment_time.strftime('%I:%M %p')}</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">⏱️ Duration</span>
+                                    <span class="detail-label">⏱️ Duration: </span>
                                     <span class="detail-value">{appointment.duration_minutes} minutes</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">📋 Practice Area</span>
+                                    <span class="detail-label">📋 Practice Area: </span>
                                     <span class="detail-value">{appointment.practice_area.name if appointment.practice_area else 'General Inquiry'}</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">🔖 Confirmation #</span>
+                                    <span class="detail-label">🔖 Confirmation: # </span>
                                     <span class="detail-value">{str(appointment.id)[:8].upper()}</span>
                                 </div>
                             </div>
@@ -290,37 +290,37 @@ def send_appointment_confirmation_email(appointment):
                         <div class="content">
                             <div class="appointment-details">
                                 <div class="detail-row">
-                                    <span class="detail-label">👤 Client Name</span>
+                                    <span class="detail-label">👤 Client Name: </span>
                                     <span class="detail-value">{appointment.client_name}</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">📧 Email</span>
+                                    <span class="detail-label">📧 Email: </span>
                                     <span class="detail-value"><a href="mailto:{appointment.client_email}" style="color: #B45309; text-decoration: none;">{appointment.client_email}</a></span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">📞 Phone</span>
+                                    <span class="detail-label">📞 Phone: </span>
                                     <span class="detail-value">{appointment.client_phone}</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">📅 Date</span>
+                                    <span class="detail-label">📅 Date: </span>
                                     <span class="detail-value">{appointment.appointment_date.strftime('%B %d, %Y')}</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">🕐 Time</span>
+                                    <span class="detail-label">🕐 Time: </span>
                                     <span class="detail-value">{appointment.appointment_time.strftime('%I:%M %p')}</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">📋 Practice Area</span>
+                                    <span class="detail-label">📋 Practice Area: </span>
                                     <span class="detail-value">{appointment.practice_area.name if appointment.practice_area else 'General Inquiry'}</span>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">⏱️ Duration</span>
+                                    <span class="detail-label">⏱️ Duration: </span>
                                     <span class="detail-value">{appointment.duration_minutes} minutes</span>
                                 </div>
                             </div>
                             
                             <div class="footer">
-                                <p>Confirmation # {str(appointment.id)[:8].upper()}</p>
+                                <p>🔖 Confirmation: # {str(appointment.id)[:8].upper()}</p> 
                             </div>
                         </div>
                     </div>

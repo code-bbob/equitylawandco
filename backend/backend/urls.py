@@ -23,6 +23,7 @@ from pages.viewsets import (
     PracticeAreaViewSet, ContactMessageViewSet, 
     AppointmentViewSet, BusinessHoursViewSet, HolidayViewSet, AttorneyViewSet
 )
+from blogs.viewsets import BlogViewSet
 
 router = DefaultRouter()
 router.register(r'practice-areas', PracticeAreaViewSet, basename='practice-area')
@@ -31,6 +32,7 @@ router.register(r'appointments', AppointmentViewSet, basename='appointment')
 router.register(r'business-hours', BusinessHoursViewSet, basename='business-hours')
 router.register(r'holidays', HolidayViewSet, basename='holiday')
 router.register(r'attorneys', AttorneyViewSet, basename='attorney')
+router.register(r'blogs', BlogViewSet, basename='blog')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
