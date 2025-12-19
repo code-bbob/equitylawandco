@@ -63,37 +63,55 @@ export default function PracticeAreaDetail({ params }) {
       <style>{`
         figure {
           margin: 1rem 0;
+          max-width: 100%;
         }
         figure.image {
           display: inline-block;
+          max-width: 100%;
+        }
+        @media (max-width: 768px) {
+          figure.image-style-side,
+          figure.image-style-align-left,
+          figure.image-style-align-right {
+            float: none;
+            margin: 1rem 0 !important;
+            width: 100%;
+            max-width: 100%;
+          }
         }
         figure.image-style-side {
           float: right;
           margin: 0 0 1rem 1.5rem;
+          max-width: 40%;
         }
         figure.image-style-align-left {
           float: left;
           margin: 0 1.5rem 1rem 0;
+          max-width: 40%;
         }
         figure.image-style-align-right {
           float: right;
           margin: 0 0 1rem 1.5rem;
+          max-width: 40%;
         }
         figure.image-style-align-center {
           display: block;
           margin: 1.5rem auto;
           text-align: center;
+          max-width: 100%;
         }
         figure.image-style-full {
           display: block;
           width: 100%;
           margin: 1.5rem 0;
+          max-width: 100%;
         }
         figure img {
           max-width: 100%;
           height: auto;
           border-radius: 0.5rem;
           display: block;
+          object-fit: cover;
         }
         figcaption {
           text-align: center;
@@ -114,16 +132,16 @@ export default function PracticeAreaDetail({ params }) {
 
       {/* Hero Section with Featured Image */}
       {area.featured_image_url && (
-        <div className="relative h-96 bg-amber-900 overflow-hidden">
+        <div className="relative h-64 md:h-96 bg-amber-900 overflow-hidden">
           <img
             src={area.featured_image_url}
             alt={area.name}
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-amber-900 to-transparent flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">{area.name}</h1>
-              <p className="text-xl text-amber-100">Premium Legal Services</p>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-4">{area.name}</h1>
+              <p className="text-lg md:text-xl text-amber-100">Premium Legal Services</p>
             </div>
           </div>
         </div>
@@ -143,12 +161,12 @@ export default function PracticeAreaDetail({ params }) {
         )}
 
         {/* Two Column Layout: Description + Images */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16 overflow-hidden">
           {/* Main Description - 2 columns */}
-          <div className="lg:col-span-2">
-            <div className="prose prose-lg max-w-none prose-img:rounded-lg prose-img:shadow-md">
+          <div className="lg:col-span-2 overflow-hidden">
+            <div className="prose prose-sm md:prose-lg max-w-none prose-img:rounded-lg prose-img:shadow-md overflow-hidden">
               <div
-                className="text-amber-900 leading-relaxed text-lg"
+                className="text-amber-900 leading-relaxed text-sm md:text-lg break-words overflow-x-hidden"
                 dangerouslySetInnerHTML={{
                   __html: area.description.replace(/src="\/media\//g, 'src="http://localhost:8000/media/'),
                 }}
@@ -159,13 +177,13 @@ export default function PracticeAreaDetail({ params }) {
           {/* Side Gallery */}
           {area.featured_image_url && (
             <div className="lg:col-span-1">
-              <div className="sticky top-20">
+              <div className="sticky top-24 lg:top-20">
                 <div className="bg-gradient-to-br from-amber-100 to-amber-50 p-6 rounded-lg border-2 border-amber-300">
                   <h3 className="text-lg font-bold text-amber-900 mb-4">Key Information</h3>
                   <img
                     src={area.featured_image_url}
                     alt={area.name}
-                    className="w-full h-auto rounded-lg shadow-md mb-4"
+                    className="w-full h-64 object-cover rounded-lg shadow-md mb-4"
                   />
                   <ul className="space-y-3 text-sm text-amber-900">
                     <li className="flex items-start">

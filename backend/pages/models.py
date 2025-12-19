@@ -38,8 +38,8 @@ class Appointment(models.Model):
         verbose_name_plural = "Appointments"
 
 
-class BusinessHours(models.Model):
-    """Define business hours for each day of the week"""
+class AppointmentDay(models.Model):
+    """Define appointment availability for each day of the week"""
     DAY_CHOICES = [
         (0, 'Monday'),
         (1, 'Tuesday'),
@@ -51,29 +51,29 @@ class BusinessHours(models.Model):
     ]
     
     day_of_week = models.IntegerField(choices=DAY_CHOICES, unique=True)
-    is_open = models.BooleanField(default=True)
-    start_time = models.TimeField(default='09:00')
-    end_time = models.TimeField(default='17:00')
+    is_active = models.BooleanField(default=True, help_text="Whether appointments can be booked on this day")
     
     def __str__(self):
-        return f"{self.get_day_of_week_display()} - {self.start_time} to {self.end_time}" if self.is_open else f"{self.get_day_of_week_display()} - Closed"
+        return f"{self.get_day_of_week_display()}"
     
     class Meta:
-        verbose_name_plural = "Business Hours"
+        verbose_name_plural = "Appointment Days"
+        ordering = ['day_of_week']
 
 
-class Holiday(models.Model):
-    """Define holidays and closed dates"""
-    date = models.DateField(unique=True)
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
+class AvailableHours(models.Model):
+    """Define available appointment time windows within a day"""
+    day = models.ForeignKey(AppointmentDay, on_delete=models.CASCADE, related_name='available_hours')
+    start_time = models.TimeField(help_text="Window start time (e.g., 9:00 AM)")
+    end_time = models.TimeField(help_text="Window end time (e.g., 11:00 AM)")
     
     def __str__(self):
-        return f"{self.date} - {self.name}"
+        return f"{self.day.get_day_of_week_display()} - {self.start_time} to {self.end_time}"
     
     class Meta:
-        verbose_name_plural = "Holidays"
-        ordering = ['date']
+        verbose_name_plural = "Available Hours"
+        ordering = ['day', 'start_time']
+        unique_together = ['day', 'start_time', 'end_time']
 
 
 class PracticeArea(models.Model):
@@ -107,6 +107,7 @@ class PracticeAreaImage(models.Model):
 class ContactMessage(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True, help_text="Client phone number")
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)

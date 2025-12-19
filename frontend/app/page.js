@@ -1,59 +1,59 @@
 import Hero from './components/Hero';
 import PracticeAreasPreview from './components/PracticeAreasPreview';
 import ContactForm from './components/ContactForm';
-
 export default function Home() {
   return (
     <>
       <Hero />
       <PracticeAreasPreview />
 
+    <div className='text-3xl text-black '>Hear from our attorneys here</div>
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="text-xs font-semibold text-amber-700 tracking-widest uppercase">Why We Stand Out</span>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mt-3 mb-8 leading-tight">Trusted Expertise<br/><span className="text-amber-700">You Deserve</span></h2>
+              <span className="text-xs font-semibold text-amber-700 tracking-widest uppercase">About Equity Law & Co.</span>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mt-3 mb-8 leading-tight">Founded on<br/><span className="text-amber-700">Principles of Equity</span></h2>
               <ul className="space-y-4 text-slate-700">
                 <li className="flex items-start">
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
                     <span className="text-white text-sm font-bold">✓</span>
                   </div>
-                  <span className="text-base leading-relaxed">Over 20 years of proven legal excellence</span>
+                  <span className="text-base leading-relaxed">Established in 2014 A.D., restructured in 2025 A.D.</span>
                 </li>
                 <li className="flex items-start">
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
                     <span className="text-white text-sm font-bold">✓</span>
                   </div>
-                  <span className="text-base leading-relaxed">Dedicated team of seasoned professionals</span>
+                  <span className="text-base leading-relaxed">Core pillars: Fairness, Diligence, Responsiveness & Equity</span>
                 </li>
                 <li className="flex items-start">
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
                     <span className="text-white text-sm font-bold">✓</span>
                   </div>
-                  <span className="text-base leading-relaxed">Personalized approach to every client</span>
+                  <span className="text-base leading-relaxed">Practical, reliable, and result-oriented solutions</span>
                 </li>
                 <li className="flex items-start">
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
                     <span className="text-white text-sm font-bold">✓</span>
                   </div>
-                  <span className="text-base leading-relaxed">Track record of winning outcomes</span>
+                  <span className="text-base leading-relaxed">Expertise in IP, Real Estate, Arbitration & Corporate Law</span>
                 </li>
                 <li className="flex items-start">
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
                     <span className="text-white text-sm font-bold">✓</span>
                   </div>
-                  <span className="text-base leading-relaxed">Round-the-clock support for urgent matters</span>
+                  <span className="text-base leading-relaxed">Committed to highest standards of professional ethics</span>
                 </li>
               </ul>
             </div>
             <div className="bg-amber-700 h-96 rounded-lg shadow-md flex items-center justify-center text-white text-center relative overflow-hidden">
               <div className="absolute inset-0 opacity-10"><div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 1px)', backgroundSize: '50px 50px'}}></div></div>
               <div className="relative z-10">
-                <div className="text-6xl font-bold mb-3">20+</div>
-                <div className="text-lg font-normal">Years of Excellence</div>
-                <div className="text-sm text-amber-100 mt-4">Serving clients with distinction</div>
+                <div className="text-6xl font-bold mb-3">10+</div>
+                <div className="text-lg font-normal">Years of Service</div>
+                <div className="text-sm text-amber-100 mt-4">Established 2014, Leading Since 2025</div>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function Home() {
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-semibold text-slate-900 text-sm">Email</h3>
-                  <p className="text-slate-600 text-sm mt-0.5">info@equitylaw.com</p>
+                  <p className="text-slate-600 text-sm mt-0.5">contact@equitylaw.com</p>
                   <p className="text-xs text-amber-700 mt-1">Response within 24h</p>
                 </div>
               </div>
@@ -93,8 +93,8 @@ export default function Home() {
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-semibold text-slate-900 text-sm">Phone</h3>
-                  <p className="text-slate-600 text-sm mt-0.5">(555) 123-4567</p>
-                  <p className="text-xs text-amber-700 mt-1">9 AM - 6 PM EST</p>
+                  <p className="text-slate-600 text-sm mt-0.5">+977 1 4123456</p>
+                  <p className="text-xs text-amber-700 mt-1">9 AM - 6 PM NPT</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
@@ -103,7 +103,7 @@ export default function Home() {
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-semibold text-slate-900 text-sm">Office</h3>
-                  <p className="text-slate-600 text-sm mt-0.5">123 Legal Ave, Suite 100</p>
+                  <p className="text-slate-600 text-sm mt-0.5">Thapagaun, Kathmandu-10, Nepal</p>
                   <p className="text-xs text-amber-700 mt-1">Walk-ins welcome</p>
                 </div>
               </div>

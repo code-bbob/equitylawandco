@@ -1,11 +1,38 @@
 from django.contrib import admin
-from .models import PracticeArea, PracticeAreaImage, ContactMessage, Appointment, BusinessHours, Holiday, Attorney, Blog
+from .models import PracticeArea, PracticeAreaImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Attorney, Blog
 
 class PracticeAreaImageInline(admin.TabularInline):
     model = PracticeAreaImage
     extra = 3
     fields = ['image', 'title', 'description', 'order']
     ordering = ['order']
+
+
+class AvailableHoursInline(admin.TabularInline):
+    """Inline editing for available hours within AppointmentDay"""
+    model = AvailableHours
+    extra = 1
+    fields = ['start_time', 'end_time']
+    ordering = ['start_time']
+
+
+class AppointmentDayAdmin(admin.ModelAdmin):
+    """Admin for appointment days with inline available hours"""
+    list_display = ['get_day_display', 'is_active', 'window_count']
+    list_filter = ['is_active']
+    fields = ['day_of_week', 'is_active']
+    inlines = [AvailableHoursInline]
+    ordering = ['day_of_week']
+    
+    def get_day_display(self, obj):
+        return obj.get_day_of_week_display()
+    get_day_display.short_description = 'Day'
+    
+    def window_count(self, obj):
+        count = obj.available_hours.count()
+        return f'{count} window{"s" if count != 1 else ""}'
+    window_count.short_description = 'Time Windows'
+
 
 class PracticeAreaAdmin(admin.ModelAdmin):
     list_display = ['name', 'featured_image_preview', 'gallery_count']
@@ -76,57 +103,8 @@ class AppointmentAdmin(admin.ModelAdmin):
     confirmation_status.short_description = 'Confirmation Email'
 
 
-class BusinessHoursAdmin(admin.ModelAdmin):
-    list_display = ['get_day_display', 'is_open', 'start_time', 'end_time']
-    list_filter = ['is_open']
-    fields = ['day_of_week', 'is_open', 'start_time', 'end_time']
-    
-    def get_day_display(self, obj):
-        return obj.get_day_of_week_display()
-    get_day_display.short_description = 'Day'
-
-
-class HolidayAdmin(admin.ModelAdmin):
-    list_display = ['date', 'name', 'description']
-    list_filter = ['date']
-    search_fields = ['name', 'description']
-    fields = ['date', 'name', 'description']
-    date_hierarchy = 'date'
-
-
-class AttorneyAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'slug', 'job_title', 'is_active', 'order', 'photo_preview', 'created_at']
-    list_filter = ['is_active', 'job_title', 'created_at']
-    search_fields = ['full_name', 'job_title', 'short_bio', 'professional_background','specializations', 'email']
-    readonly_fields = ['id', 'slug', 'created_at', 'updated_at']
-    fieldsets = (
-        ('Personal Information', {
-            'fields': ('full_name', 'slug', 'job_title', 'photo')
-        }),
-        ('Professional Details', {
-            'fields': ('short_bio','professional_background' ,'specializations', 'email', 'phone')
-        }),
-        ('Display Settings', {
-            'fields': ('is_active', 'order')
-        }),
-        ('Metadata', {
-            'fields': ('id', 'created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-    )
-    ordering = ['order', 'full_name']
-    
-    def photo_preview(self, obj):
-        if obj.photo:
-            return '✓ Photo uploaded'
-        return '✗ No photo'
-    photo_preview.short_description = 'Photo'
-
-
 admin.site.register(Appointment, AppointmentAdmin)
-admin.site.register(BusinessHours, BusinessHoursAdmin)
-admin.site.register(Holiday, HolidayAdmin)
-admin.site.register(Attorney, AttorneyAdmin)
+admin.site.register(AppointmentDay, AppointmentDayAdmin)
 
 
 class BlogAdmin(admin.ModelAdmin):

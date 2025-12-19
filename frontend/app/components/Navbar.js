@@ -8,6 +8,7 @@ import { ChevronDown } from 'lucide-react';
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { practiceAreas, loading, error } = usePracticeAreas();
   const dropdownRef = useRef(null);
@@ -37,7 +38,7 @@ export default function Navbar() {
               height={60}
               className="object-contain"
             />
-            <span className="hidden sm:inline text-amber-900 font-semibold text-base tracking-tight">Equity Law & Co.</span>
+            <span className="hidden sm:inline text-amber-900 text-xl font-semibold text-base tracking-tight">Equity Law & Co.</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -46,7 +47,7 @@ export default function Navbar() {
               Home
             </Link>
 
-            <Link href="/#about" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
+            <Link href="/about" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
               About
             </Link>
             <Link href="/attorneys" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
@@ -122,21 +123,21 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden pb-4 space-y-2 border-t border-slate-100">
-            <Link href="/" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               Home
             </Link>
-            <Link href="/attorneys" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
+            <Link href="/attorneys" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               Our Attorneys
             </Link>
 
             {/* Mobile Practice Areas */}
             <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
               className="w-full text-left px-4 py-2 hover:bg-slate-50 rounded-md flex items-center justify-between text-slate-700 text-sm"
             >
               <span>Practice Areas</span>
               <svg
-                className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
+                className={`w-4 h-4 transition-transform ${isMobileDropdownOpen ? 'rotate-180' : ''}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -145,35 +146,43 @@ export default function Navbar() {
               </svg>
             </button>
 
-            {isDropdownOpen && (
+            {isMobileDropdownOpen && (
               <div className="bg-slate-50 rounded-md py-2 ml-4">
-                {practiceAreas.map((area) => (
-                  <Link
-                    key={area.id}
-                    href={`/practice-areas/${area.id}`}
-                    onClick={() => {
-                      setIsDropdownOpen(false);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="block px-4 py-2 hover:bg-slate-100 rounded transition-colors text-slate-700 text-sm"
-                  >
-                    <div className="font-medium">{area.name}</div>
-                  </Link>
-                ))}
+                {loading ? (
+                  <div className="px-4 py-2 text-slate-500 text-center text-sm">Loading...</div>
+                ) : error ? (
+                  <div className="px-4 py-2 text-red-500 text-center text-sm">Error loading areas</div>
+                ) : practiceAreas.length === 0 ? (
+                  <div className="px-4 py-2 text-slate-500 text-center text-sm">No practice areas available</div>
+                ) : (
+                  practiceAreas.map((area) => (
+                    <Link
+                      key={area.id}
+                      href={`/practice-areas/${area.id}`}
+                      onClick={() => {
+                        setIsMobileDropdownOpen(false);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="block px-4 py-2 hover:bg-slate-100 rounded transition-colors text-slate-700 text-sm"
+                    >
+                      <div className="font-medium">{area.name}</div>
+                    </Link>
+                  ))
+                )}
               </div>
             )}
 
-            <Link href="/#about" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
+            <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               About
             </Link>
-            <Link href="/blogs" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
+            <Link href="/blogs" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               Blogs
             </Link>
-            <Link href="/#contact" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
+            <Link href="/#contact" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               Contact
             </Link>
             <Link href="/appointments">
-              <button className="w-full bg-slate-800 hover:bg-slate-900 px-4 py-2 rounded-md transition-colors font-medium mt-2 text-white text-sm">
+              <button onClick={() => setIsMobileMenuOpen(false)} className="w-full bg-slate-800 hover:bg-slate-900 px-4 py-2 rounded-md transition-colors font-medium mt-2 text-white text-sm">
                 Get Consultation
               </button>
             </Link>

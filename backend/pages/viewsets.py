@@ -2,10 +2,10 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from datetime import datetime, timedelta
-from .models import PracticeArea, ContactMessage, Appointment, BusinessHours, Holiday, Attorney
+from .models import PracticeArea, ContactMessage, Appointment, AppointmentDay, AvailableHours, Attorney
 from .serializers import (
     PracticeAreaSerializer, ContactMessageSerializer, 
-    AppointmentSerializer, BusinessHoursSerializer, HolidaySerializer, AttorneySerializer
+    AppointmentSerializer, AppointmentDaySerializer, AvailableHoursSerializer, AttorneySerializer
 )
 from .utils import send_contact_email_async, send_appointment_confirmation_email, get_available_time_slots
 
@@ -66,49 +66,42 @@ class AppointmentViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        # Check if it's a holiday
-        if Holiday.objects.filter(date=appointment_date).exists():
-            return Response(
-                {"error": "The selected date is a holiday. Please choose another date."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        # Get business hours for this day
+        # Get appointment day for this day of the week
         day_of_week = appointment_date.weekday()
         try:
-            business_hours = BusinessHours.objects.get(day_of_week=day_of_week)
-        except BusinessHours.DoesNotExist:
+            appointment_day = AppointmentDay.objects.get(day_of_week=day_of_week)
+        except AppointmentDay.DoesNotExist:
             return Response(
-                {"error": "Business hours not configured for this day."},
+                {"error": "Appointments cannot be booked on this day."},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        if not business_hours.is_open:
+        if not appointment_day.is_active:
             return Response(
                 {"error": "The office is closed on this day."},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        # Check if appointment time is within business hours
-        if not (business_hours.start_time <= appointment_time):
-            return Response(
-                {"error": f"Appointment time must be after {business_hours.start_time}"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        # Check if appointment time is within available windows
+        available_windows = appointment_day.available_hours.all()
+        is_within_window = False
         
-        # Calculate end time and check if it's within business hours
-        from datetime import datetime as dt
-        appointment_end = (dt.combine(appointment_date, appointment_time) + 
-                          timedelta(minutes=duration_minutes)).time()
+        for window in available_windows:
+            appointment_end = (datetime.combine(appointment_date, appointment_time) + 
+                              timedelta(minutes=duration_minutes)).time()
+            
+            if window.start_time <= appointment_time and appointment_end <= window.end_time:
+                is_within_window = True
+                break
         
-        if appointment_end > business_hours.end_time:
+        if not is_within_window:
             return Response(
-                {"error": f"Appointment must end by {business_hours.end_time}"},
+                {"error": "This appointment time is not within available office hours."},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
         # Check for overlapping appointments
-        appointment_start_dt = dt.combine(appointment_date, appointment_time)
+        appointment_start_dt = datetime.combine(appointment_date, appointment_time)
         appointment_end_dt = appointment_start_dt + timedelta(minutes=duration_minutes)
         
         # Get all existing appointments for this date
@@ -119,7 +112,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         
         # Check if this appointment overlaps with any existing appointment
         for appt in existing_appointments:
-            appt_start_dt = dt.combine(appointment_date, appt.appointment_time)
+            appt_start_dt = datetime.combine(appointment_date, appt.appointment_time)
             appt_end_dt = appt_start_dt + timedelta(minutes=appt.duration_minutes)
             
             # Check for overlap: new appointment starts before existing ends AND new appointment ends after existing starts
@@ -189,19 +182,6 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         for i in range(1, days_ahead + 1):
             check_date = today + timedelta(days=i)
             
-            # Skip if holiday
-            if Holiday.objects.filter(date=check_date).exists():
-                continue
-            
-            # Check business hours
-            day_of_week = check_date.weekday()
-            try:
-                business_hours = BusinessHours.objects.get(day_of_week=day_of_week)
-                if not business_hours.is_open:
-                    continue
-            except BusinessHours.DoesNotExist:
-                continue
-            
             # Check if there are available slots for this date
             slots = get_available_time_slots(check_date, duration_minutes)
             if slots:
@@ -217,18 +197,18 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         })
 
 
-class BusinessHoursViewSet(viewsets.ModelViewSet):
-    """ViewSet for managing business hours"""
-    queryset = BusinessHours.objects.all()
-    serializer_class = BusinessHoursSerializer
+class AppointmentDayViewSet(viewsets.ModelViewSet):
+    """ViewSet for managing appointment days and their available hours"""
+    queryset = AppointmentDay.objects.all()
+    serializer_class = AppointmentDaySerializer
     ordering = ['day_of_week']
 
 
-class HolidayViewSet(viewsets.ModelViewSet):
-    """ViewSet for managing holidays"""
-    queryset = Holiday.objects.all()
-    serializer_class = HolidaySerializer
-    ordering = ['date']
+class AvailableHoursViewSet(viewsets.ModelViewSet):
+    """ViewSet for managing available appointment windows"""
+    queryset = AvailableHours.objects.all()
+    serializer_class = AvailableHoursSerializer
+    ordering = ['day', 'start_time']
 
 
 class AttorneyViewSet(viewsets.ModelViewSet):
@@ -239,3 +219,4 @@ class AttorneyViewSet(viewsets.ModelViewSet):
     ordering_fields = ['order', 'full_name', 'job_title']
     ordering = ['order', 'full_name']
     lookup_field = 'slug'
+

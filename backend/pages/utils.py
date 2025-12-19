@@ -351,68 +351,72 @@ def send_appointment_confirmation_email(appointment):
 
 def get_available_time_slots(date, duration_minutes=60):
     """
-    Get available time slots for a given date
+    Get available time slots for a given date based on defined available hours windows
     Returns a list of available appointment times
-    Checks for overlaps considering the full duration of requested appointments
+    Only generates slots within the configured available hours windows for that day
+    Checks for overlaps with existing appointments
     """
     from datetime import datetime, time
-    from .models import Appointment, BusinessHours, Holiday
+    from .models import Appointment, AppointmentDay, AvailableHours
     
     # Check if date is in the past
     if date < datetime.now().date():
         return []
     
-    # Check if it's a holiday
-    if Holiday.objects.filter(date=date).exists():
-        return []
-    
-    # Get business hours for this day
+    # Get appointment day configuration for this day
     day_of_week = date.weekday()
     try:
-        business_hours = BusinessHours.objects.get(day_of_week=day_of_week)
-    except BusinessHours.DoesNotExist:
+        appointment_day = AppointmentDay.objects.get(day_of_week=day_of_week)
+    except AppointmentDay.DoesNotExist:
         return []
     
-    if not business_hours.is_open:
+    if not appointment_day.is_active:
         return []
     
-    # Generate time slots
+    # Get available hour windows for this day
+    available_windows = appointment_day.available_hours.all().order_by('start_time')
+    
+    if not available_windows.exists():
+        return []
+    
+    # Generate time slots within available windows
     available_slots = []
-    current_time = business_hours.start_time
-    end_time = business_hours.end_time
     
-    while current_time < end_time:
-        # Calculate the end time for this potential appointment
-        slot_end = (datetime.combine(date, current_time) + timedelta(minutes=duration_minutes)).time()
+    for window in available_windows:
+        current_time = window.start_time
+        window_end = window.end_time
         
-        # Check if slot fits within business hours
-        if slot_end <= end_time:
-            # Check for overlaps with existing appointments
-            # Convert times to datetime for comparison
-            slot_start_dt = datetime.combine(date, current_time)
-            slot_end_dt = datetime.combine(date, slot_end)
+        while current_time < window_end:
+            # Calculate the end time for this potential appointment
+            slot_end = (datetime.combine(date, current_time) + timedelta(minutes=duration_minutes)).time()
             
-            # Get all existing appointments for this date
-            existing_appointments = Appointment.objects.filter(
-                appointment_date=date,
-                status__in=['pending', 'confirmed']
-            )
-            
-            # Check if this slot overlaps with any existing appointment
-            has_overlap = False
-            for appt in existing_appointments:
-                appt_start_dt = datetime.combine(date, appt.appointment_time)
-                appt_end_dt = appt_start_dt + timedelta(minutes=appt.duration_minutes)
+            # Check if slot fits within the window
+            if slot_end <= window_end:
+                # Check for overlaps with existing appointments
+                slot_start_dt = datetime.combine(date, current_time)
+                slot_end_dt = datetime.combine(date, slot_end)
                 
-                # Check for overlap: slot starts before appt ends AND slot ends after appt starts
-                if slot_start_dt < appt_end_dt and slot_end_dt > appt_start_dt:
-                    has_overlap = True
-                    break
+                # Get all existing appointments for this date
+                existing_appointments = Appointment.objects.filter(
+                    appointment_date=date,
+                    status__in=['pending', 'confirmed']
+                )
+                
+                # Check if this slot overlaps with any existing appointment
+                has_overlap = False
+                for appt in existing_appointments:
+                    appt_start_dt = datetime.combine(date, appt.appointment_time)
+                    appt_end_dt = appt_start_dt + timedelta(minutes=appt.duration_minutes)
+                    
+                    # Check for overlap: slot starts before appt ends AND slot ends after appt starts
+                    if slot_start_dt < appt_end_dt and slot_end_dt > appt_start_dt:
+                        has_overlap = True
+                        break
+                
+                if not has_overlap:
+                    available_slots.append(current_time)
             
-            if not has_overlap:
-                available_slots.append(current_time)
-        
-        # Move to next slot (30-minute intervals)
-        current_time = (datetime.combine(date, current_time) + timedelta(minutes=30)).time()
+            # Move to next slot (30-minute intervals)
+            current_time = (datetime.combine(date, current_time) + timedelta(minutes=30)).time()
     
     return available_slots

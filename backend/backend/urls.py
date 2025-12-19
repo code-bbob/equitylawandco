@@ -21,7 +21,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from pages.viewsets import (
     PracticeAreaViewSet, ContactMessageViewSet, 
-    AppointmentViewSet, BusinessHoursViewSet, HolidayViewSet, AttorneyViewSet
+    AppointmentViewSet, AppointmentDayViewSet, AvailableHoursViewSet, AttorneyViewSet
 )
 from blogs.viewsets import BlogViewSet
 
@@ -29,8 +29,8 @@ router = DefaultRouter()
 router.register(r'practice-areas', PracticeAreaViewSet, basename='practice-area')
 router.register(r'contact', ContactMessageViewSet, basename='contact')
 router.register(r'appointments', AppointmentViewSet, basename='appointment')
-router.register(r'business-hours', BusinessHoursViewSet, basename='business-hours')
-router.register(r'holidays', HolidayViewSet, basename='holiday')
+router.register(r'appointment-days', AppointmentDayViewSet, basename='appointment-day')
+router.register(r'available-hours', AvailableHoursViewSet, basename='available-hours')
 router.register(r'attorneys', AttorneyViewSet, basename='attorney')
 router.register(r'blogs', BlogViewSet, basename='blog')
 

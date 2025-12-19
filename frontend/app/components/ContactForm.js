@@ -6,6 +6,7 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: '',
   });
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,7 @@ export default function ContactForm() {
       }
 
       setSuccess(true);
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
 
       // Clear success message after 5 seconds
       setTimeout(() => setSuccess(false), 5000);
@@ -83,6 +84,21 @@ export default function ContactForm() {
           required
           className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-slate-900 placeholder-slate-500 text-sm transition-all"
           placeholder="john@example.com"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="phone" className="block text-sm font-semibold text-slate-900 mb-2">
+          Your Phone Number
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-slate-900 placeholder-slate-500 text-sm transition-all"
+          placeholder="+977 1234567890"
         />
       </div>
 

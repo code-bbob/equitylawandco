@@ -14,7 +14,7 @@ export default function Hero() {
           Your Trusted Legal <span className="text-amber-700">Partner</span>
         </h1>
         <p className="text-base md:text-lg text-slate-700 mb-10 max-w-3xl mx-auto leading-relaxed font-normal">
-          Strategic legal solutions with integrity, expertise, and unwavering commitment to your success. Trusted by industry leaders.
+          Practical, reliable, and result-oriented legal solutions founded on the principles of fairness, diligence, responsiveness, and equity. Trusted legal partner for businesses and individuals across Nepal.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button className="bg-amber-700 hover:bg-amber-800 text-white px-8 py-3 rounded-lg font-semibold text-base transition-all hover:shadow-lg">

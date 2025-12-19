@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import PracticeArea, PracticeAreaImage, ContactMessage, Appointment, BusinessHours, Holiday, Attorney
+from .models import PracticeArea, PracticeAreaImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Attorney
 
 
 class PracticeAreaImageSerializer(serializers.ModelSerializer):
@@ -38,22 +38,23 @@ class PracticeAreaSerializer(serializers.ModelSerializer):
 class ContactMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactMessage
-        fields = ['id', 'name', 'email', 'message', 'created_at']
+        fields = ['id', 'name', 'email', 'phone', 'message', 'created_at']
         read_only_fields = ['id', 'created_at']
 
 
-class BusinessHoursSerializer(serializers.ModelSerializer):
-    day_of_week_display = serializers.CharField(source='get_day_of_week_display', read_only=True)
+class AvailableHoursSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvailableHours
+        fields = ['id', 'day', 'start_time', 'end_time']
+
+
+class AppointmentDaySerializer(serializers.ModelSerializer):
+    day_display = serializers.CharField(source='get_day_of_week_display', read_only=True)
+    available_hours = AvailableHoursSerializer(many=True, read_only=True)
     
     class Meta:
-        model = BusinessHours
-        fields = ['id', 'day_of_week', 'day_of_week_display', 'is_open', 'start_time', 'end_time']
-
-
-class HolidaySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Holiday
-        fields = ['id', 'date', 'name', 'description']
+        model = AppointmentDay
+        fields = ['id', 'day_of_week', 'day_display', 'is_active', 'available_hours']
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
