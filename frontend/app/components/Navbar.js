@@ -25,27 +25,31 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white text-amber-900 shadow-lg sticky top-0 z-50 border-b-2 border-amber-800">
+    <nav className="bg-white text-slate-800 shadow-sm sticky top-0 z-50 border-b border-amber-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between font-semibold items-center h-24">
+        <div className="flex justify-between items-center h-20">
           {/* Logo/Brand */}
-          <Link href="/" className="flex items-center space-x-2 font-bold text-xl hover:opacity-80 transition-opacity">
+          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <Image 
               src="/images/image.svg" 
               alt="Equity Law & Co Logo" 
-              width={70} 
-              height={70}
+              width={60} 
+              height={60}
               className="object-contain"
             />
-            <span className="hidden sm:inline text-[var(--logo-color)] font-bold">Equity Law & Co</span>
+            <span className="hidden sm:inline text-amber-900 font-semibold text-base tracking-tight">Equity Law & Co.</span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link href="/" className="hover:text-blue-900 transition-colors">
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
               Home
             </Link>
-            <Link href="/attorneys" className="hover:text-blue-900 transition-colors">
+
+            <Link href="/#about" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
+              About
+            </Link>
+            <Link href="/attorneys" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
               Our Attorneys
             </Link>
 
@@ -55,7 +59,7 @@ export default function Navbar() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center space-x-1 hover:text-blue-900 transition-colors py-2"
+                className="flex items-center space-x-1 text-slate-700 hover:text-slate-900 transition-colors py-2 text-sm font-medium"
               >
                 <span>Practice Areas</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -63,20 +67,20 @@ export default function Navbar() {
 
               {/* Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-amber-50 rounded-lg shadow-xl border border-amber-300 py-2 z-10">
+                <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-md shadow-md border border-slate-200 py-1 z-10">
                   {loading ? (
-                    <div className="px-4 py-2 text-amber-600 text-center">Loading...</div>
+                    <div className="px-4 py-2 text-slate-500 text-center text-sm">Loading...</div>
                   ) : error ? (
-                    <div className="px-4 py-2 text-red-600 text-center">Error loading areas</div>
+                    <div className="px-4 py-2 text-red-500 text-center text-sm">Error loading areas</div>
                   ) : practiceAreas.length === 0 ? (
-                    <div className="px-4 py-2 text-amber-600 text-center">No practice areas available</div>
+                    <div className="px-4 py-2 text-slate-500 text-center text-sm">No practice areas available</div>
                   ) : (
                     practiceAreas.map((area) => (
                       <Link
                         key={area.id}
                         href={`/practice-areas/${area.id}`}
                         onClick={() => setIsDropdownOpen(false)}
-                        className="block px-4 py-2 hover:bg-amber-200 hover:text-amber-900 transition-colors text-amber-900"
+                        className="block px-4 py-2 hover:bg-slate-50 text-slate-700 transition-colors text-sm"
                       >
                         <div className="font-medium">{area.name}</div>
                         {/* <div className="text-xs text-gray-400 line-clamp-1">
@@ -88,19 +92,15 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-
-            <Link href="/#about" className="hover:text-blue-900 transition-colors">
-              About
-            </Link>
-            <Link href="/blogs" className="hover:text-blue-900 transition-colors">
-              Blogs
-            </Link>
-            <Link href="/#contact" className="hover:text-blue-900 transition-colors">
+            <Link href="/#contact" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
               Contact
             </Link>
 
+            <Link href="/blogs" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
+              Blogs
+            </Link>
             <Link href="/appointments">
-            <button className="bg-slate-400 hover:bg-amber-900 px-6 py-2 rounded-lg ml-4 text-white transition-colors font-medium">
+            <button className="bg-amber-700 hover:bg-amber-800 px-6 py-2 rounded-lg ml-6 text-white transition-all hover:shadow-md font-medium text-sm">
               Get Consultation
             </button>
             </Link>
@@ -110,7 +110,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-400 hover:text-white"
+              className="text-slate-600 hover:text-slate-800"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -121,18 +121,18 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden pb-4 space-y-2">
-            <Link href="/" className="block px-4 py-2 hover:bg-slate-700 rounded-lg">
+          <div className="md:hidden pb-4 space-y-2 border-t border-slate-100">
+            <Link href="/" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               Home
             </Link>
-            <Link href="/attorneys" className="block px-4 py-2 hover:bg-slate-700 rounded-lg">
+            <Link href="/attorneys" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               Our Attorneys
             </Link>
 
             {/* Mobile Practice Areas */}
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-full text-left px-4 py-2 hover:bg-slate-700 rounded-lg flex items-center justify-between"
+              className="w-full text-left px-4 py-2 hover:bg-slate-50 rounded-md flex items-center justify-between text-slate-700 text-sm"
             >
               <span>Practice Areas</span>
               <svg
@@ -146,7 +146,7 @@ export default function Navbar() {
             </button>
 
             {isDropdownOpen && (
-              <div className="bg-slate-700 rounded-lg py-2 ml-4">
+              <div className="bg-slate-50 rounded-md py-2 ml-4">
                 {practiceAreas.map((area) => (
                   <Link
                     key={area.id}
@@ -155,25 +155,25 @@ export default function Navbar() {
                       setIsDropdownOpen(false);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="block px-4 py-2 hover:bg-slate-600 rounded transition-colors"
+                    className="block px-4 py-2 hover:bg-slate-100 rounded transition-colors text-slate-700 text-sm"
                   >
-                    <div className="font-medium text-sm">{area.name}</div>
+                    <div className="font-medium">{area.name}</div>
                   </Link>
                 ))}
               </div>
             )}
 
-            <Link href="/#about" className="block px-4 py-2 hover:bg-slate-700 rounded-lg">
+            <Link href="/#about" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               About
             </Link>
-            <Link href="/blogs" className="block px-4 py-2 hover:bg-slate-700 rounded-lg">
+            <Link href="/blogs" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               Blogs
             </Link>
-            <Link href="/#contact" className="block px-4 py-2 hover:bg-slate-700 rounded-lg">
+            <Link href="/#contact" className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
               Contact
             </Link>
             <Link href="/appointments">
-              <button className="w-full bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-lg transition-colors font-medium mt-2">
+              <button className="w-full bg-slate-800 hover:bg-slate-900 px-4 py-2 rounded-md transition-colors font-medium mt-2 text-white text-sm">
                 Get Consultation
               </button>
             </Link>

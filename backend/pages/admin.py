@@ -97,14 +97,14 @@ class HolidayAdmin(admin.ModelAdmin):
 class AttorneyAdmin(admin.ModelAdmin):
     list_display = ['full_name', 'slug', 'job_title', 'is_active', 'order', 'photo_preview', 'created_at']
     list_filter = ['is_active', 'job_title', 'created_at']
-    search_fields = ['full_name', 'job_title', 'bio', 'specializations', 'email']
+    search_fields = ['full_name', 'job_title', 'short_bio', 'professional_background','specializations', 'email']
     readonly_fields = ['id', 'slug', 'created_at', 'updated_at']
     fieldsets = (
         ('Personal Information', {
             'fields': ('full_name', 'slug', 'job_title', 'photo')
         }),
         ('Professional Details', {
-            'fields': ('bio', 'specializations', 'email', 'phone')
+            'fields': ('short_bio','professional_background' ,'specializations', 'email', 'phone')
         }),
         ('Display Settings', {
             'fields': ('is_active', 'order')

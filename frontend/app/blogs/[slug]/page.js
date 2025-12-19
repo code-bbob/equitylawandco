@@ -91,7 +91,7 @@ export default function BlogDetailPage() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
               {blog.category && (
-                <span className="inline-block bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                <span className="inline-block bg-amber-600 text-white px-2 py-1 rounded-full text-xs font-semibold opacity-0">
                   {blog.category}
                 </span>
               )}
@@ -107,11 +107,11 @@ export default function BlogDetailPage() {
               </div>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-amber-900 mb-4 leading-tight">
               {blog.title}
             </h1>
 
-            <p className="text-lg text-amber-800 leading-relaxed mb-8 italic border-l-4 border-amber-600 pl-4">
+            <p className="text-base text-amber-800 leading-relaxed mb-8 italic border-l-4 border-amber-600 pl-4">
               {blog.excerpt}
             </p>
           </div>

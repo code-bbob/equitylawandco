@@ -74,7 +74,7 @@ export default function BlogsPage() {
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       />
                       {blog.category && (
-                        <div className="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        <div className="absolute top-4 right-4 bg-amber-600 text-white px-2 py-1 rounded-full text-xs font-semibold opacity-0">
                           {blog.category}
                         </div>
                       )}
@@ -83,11 +83,11 @@ export default function BlogsPage() {
 
                   {/* Content */}
                   <div className="p-6">
-                    <h2 className="text-xl font-bold text-amber-900 mb-3 line-clamp-2 hover:text-amber-700">
+                    <div className="text-sm font-bold text-amber-900 mb-3 line-clamp-2 hover:text-amber-700">
                       {blog.title}
-                    </h2>
+                    </div>
 
-                    <p className="text-amber-800 mb-4 line-clamp-3 text-sm">
+                    <p className="text-amber-800 mb-4 line-clamp-3 text-xs">
                       {blog.excerpt}
                     </p>
 

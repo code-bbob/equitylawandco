@@ -4,31 +4,51 @@ import Link from 'next/link';
 
 export default function AttorneyCard({ attorney }) {
   const { slug, full_name, job_title, photo_url } = attorney;
+  
+  // Pastel color rotation for card backgrounds
+  const colors = [
+    // 'bg-yellow-100',
+    // 'bg-pink-100',
+    'bg-lime-100',
+    'bg-purple-100',
+    'bg-amber-100',
+    'bg-stone-200',
+    'bg-zinc-200'
+  ];
+  
+  // Use attorney id to select a consistent color
+  const colorIndex = (attorney.id % colors.length);
+  const bgColor = colors[colorIndex];
 
   return (
     <Link href={`/attorneys/${slug}`}>
-      <div className="bg-transparent hover:opacity-80 transition-opacity cursor-pointer text-center">
-        {/* Photo Container */}
-        <div className="mb-6 flex justify-center">
-          <div className="w-40 h-40 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden border-2 border-gray-200">
+      <div className="group cursor-pointer text-center">
+        {/* Circular Photo */}
+        <div className="mb-6 flex justify-center relative z-10">
+          <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:shadow-xl transition-shadow">
             {photo_url ? (
               <img
                 src={photo_url}
                 alt={full_name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
             ) : (
-              <span className="text-6xl text-gray-400">👤</span>
+              <div className="w-full h-full bg-slate-300 flex items-center justify-center">
+                <span className="text-4xl text-slate-400">👤</span>
+              </div>
             )}
           </div>
         </div>
-        {/* Info */}
-        <h3 className="text-lg font-semibold text-gray-900">
-          {full_name}
-        </h3>
-        <p className="text-sm text-gray-600 mt-2">
-          {job_title}
-        </p>
+        
+        {/* Colored Card Background */}
+        <div className={`${bgColor} rounded-md shadow-md hover:shadow-lg transition-all group-hover:scale-105 -mt-20 pt-16 pb-8 px-6`}>
+          <h3 className="text-lg font-semibold text-slate-900">
+            {full_name}
+          </h3>
+          <p className="text-sm text-slate-700 mt-1">
+            {job_title}
+          </p>
+        </div>
       </div>
     </Link>
   );

@@ -76,7 +76,7 @@ class AttorneySerializer(serializers.ModelSerializer):
     class Meta:
         model = Attorney
         fields = [
-            'id', 'full_name', 'slug', 'job_title', 'bio', 
+            'id', 'full_name', 'slug', 'job_title', 'short_bio', 'professional_background',
             'email', 'phone', 'photo', 'photo_url', 'order', 
             'is_active', 'specializations', 'created_at', 'updated_at'
         ]
