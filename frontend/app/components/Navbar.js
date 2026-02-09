@@ -26,7 +26,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white text-slate-800 shadow-sm sticky top-0 z-50 border-b border-amber-200">
+    <nav className="bg-orange-100 text-slate-800 shadow-sm sticky top-0 z-50 border-b border-amber-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo/Brand */}
@@ -42,15 +42,15 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
+          <div className="hidden md:flex items-center text-lg space-x-8">
+            <Link href="/" className="text-slate-700 hover:text-slate-900 hover:scale-105 transition-colors  font-medium">
               Home
             </Link>
 
-            <Link href="/about" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
+            <Link href="/about" className="text-slate-700 hover:text-slate-900 hover:scale-105 transition-colors font-medium">
               About
             </Link>
-            <Link href="/attorneys" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
+            <Link href="/attorneys" className="text-slate-700 hover:text-slate-900 hover:scale-105 transition-colors font-medium">
               Our Attorneys
             </Link>
 
@@ -60,10 +60,10 @@ export default function Navbar() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center space-x-1 text-slate-700 hover:text-slate-900 transition-colors py-2 text-sm font-medium"
+                className="flex items-center space-x-1 text-slate-700 hover:text-slate-900 transition-colors py-2 font-medium"
               >
                 <span>Practice Areas</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform hover:scale-105 ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {/* Dropdown Menu */}
@@ -93,11 +93,11 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link href="/#contact" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
+            <Link href="/#contact" className="text-slate-700 hover:text-slate-900 transition-colors font-medium">
               Contact
             </Link>
 
-            <Link href="/blogs" className="text-slate-700 hover:text-slate-900 transition-colors text-sm font-medium">
+            <Link href="/blogs" className="text-slate-700 hover:text-slate-900 transition-colors  font-medium">
               Blogs
             </Link>
             <Link href="/appointments">
