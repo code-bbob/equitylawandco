@@ -1,13 +1,16 @@
 import Hero from './components/Hero';
 import PracticeAreasPreview from './components/PracticeAreasPreview';
 import ContactForm from './components/ContactForm';
+import Navvbar from './components/Navbar';
 export default function Home() {
   return (
     <>
+    
+      {/* <Navvbar /> */}
       <Hero />
       <PracticeAreasPreview />
 
-    <div className='text-3xl text-black '>Hear from our attorneys here</div>
+    <div className='text-3xl bg-white text-black '>Hear from our attorneys here</div>
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,11 +1,18 @@
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import LenisScroll from './components/LenisScroll';
 import './globals.css';
-import { Noto_Sans } from 'next/font/google';
+import { Noto_Sans, Parisienne } from 'next/font/google';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
+});
+
+const parisienne = Parisienne({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-parisienne',
 });
 
 export const metadata = {
@@ -15,12 +22,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={parisienne.variable}>
       <body className={notoSans.className}>
-        <Navbar />
-        <main className="min-h-screen bg-white">
-          {children}
-        </main>
+        <LenisScroll />
+        <div className="relative">
+          <Navbar />
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </div>
         <Footer />
       </body>
     </html>

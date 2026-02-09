@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePracticeAreas } from '../hooks/usePracticeAreas';
 import Image from 'next/image';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -26,84 +26,118 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-orange-100 text-slate-800 shadow-sm sticky top-0 z-50 border-b border-amber-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+    <nav className="sticky top-0 z-50 overflow-hidden bg-white/90 backdrop-blur-md border-b border-slate-200">
+      <div className="mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="flex justify-between items-center h-24 md:h-20">
           {/* Logo/Brand */}
-          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <Image 
-              src="/images/image.svg" 
-              alt="Equity Law & Co Logo" 
-              width={60} 
-              height={60}
-              className="object-contain"
-            />
-            <span className="hidden sm:inline text-amber-900 text-xl font-semibold text-base tracking-tight">Equity Law & Co.</span>
+          <Link 
+            href="/" 
+            className="flex items-center space-x-4 group transition-all duration-300"
+          >
+            <div className="relative">
+              <Image 
+                src="/images/image.svg" 
+                alt="Equity Law & Co Logo" 
+                width={60} 
+                height={60}
+                className="object-contain relative z-10 transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="hidden sm:flex flex-col leading-snug">
+              <span className="text-lg sm:text-xl font-semibold text-slate-900 tracking-wide uppercase">Equity Law & Co.</span>
+              <span className="text-xs text-slate-500 tracking-[0.2em] uppercase">Attorneys at Law</span>
+            </div>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center text-lg space-x-8">
-            <Link href="/" className="text-slate-700 hover:text-slate-900 hover:scale-105 transition-colors  font-medium">
-              Home
+          <div className="hidden md:flex items-center space-x-1 text-slate-700">
+            {/* Navigation Links */}
+            <Link 
+              href="/" 
+              className="relative group px-4 py-2 text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:text-slate-900"
+            >
+              <span className="relative z-10">Home</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-slate-900 group-hover:w-full transition-all duration-300"></div>
             </Link>
 
-            <Link href="/about" className="text-slate-700 hover:text-slate-900 hover:scale-105 transition-colors font-medium">
-              About
-            </Link>
-            <Link href="/attorneys" className="text-slate-700 hover:text-slate-900 hover:scale-105 transition-colors font-medium">
-              Our Attorneys
+            <Link 
+              href="/about" 
+              className="relative group px-4 py-2 text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:text-slate-900"
+            >
+              <span className="relative z-10">About</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-slate-900 group-hover:w-full transition-all duration-300"></div>
             </Link>
 
-
+            <Link 
+              href="/attorneys" 
+              className="relative group px-4 py-2 text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:text-slate-900"
+            >
+              <span className="relative z-10">Attorneys</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-slate-900 group-hover:w-full transition-all duration-300"></div>
+            </Link>
 
             {/* Practice Areas Dropdown */}
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative px-2" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center space-x-1 text-slate-700 hover:text-slate-900 transition-colors py-2 font-medium"
+                className="relative group px-4 py-2 text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:text-slate-900 flex items-center gap-2"
               >
-                <span>Practice Areas</span>
-                <ChevronDown className={`w-4 h-4 transition-transform hover:scale-105 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                <span className="relative z-10">Practice Areas</span>
+                <ChevronDown 
+                  className={`w-4 h-4 transition-all duration-500 ${
+                    isDropdownOpen ? 'rotate-180 text-slate-900' : 'text-slate-500 group-hover:text-slate-900'
+                  }`} 
+                />
+                <div className="absolute bottom-0 left-0 w-0 h-px bg-slate-900 group-hover:w-full transition-all duration-300"></div>
               </button>
 
               {/* Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-md shadow-md border border-slate-200 py-1 z-10">
+                <div className="absolute top-full left-2 mt-4 w-72 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                  
                   {loading ? (
-                    <div className="px-4 py-2 text-slate-500 text-center text-sm">Loading...</div>
+                    <div className="px-6 py-4 text-slate-500 text-center text-sm font-medium">Loading...</div>
                   ) : error ? (
-                    <div className="px-4 py-2 text-red-500 text-center text-sm">Error loading areas</div>
+                    <div className="px-6 py-4 text-red-500 text-center text-sm font-medium">Error loading areas</div>
                   ) : practiceAreas.length === 0 ? (
-                    <div className="px-4 py-2 text-slate-500 text-center text-sm">No practice areas available</div>
+                    <div className="px-6 py-4 text-slate-500 text-center text-sm">No practice areas available</div>
                   ) : (
                     practiceAreas.map((area) => (
                       <Link
                         key={area.id}
                         href={`/practice-areas/${area.id}`}
                         onClick={() => setIsDropdownOpen(false)}
-                        className="block px-4 py-2 hover:bg-slate-50 text-slate-700 transition-colors text-sm"
+                        className="block px-6 py-3 text-slate-700 hover:text-slate-900 text-sm font-medium transition-all duration-200 border-l-2 border-transparent hover:border-slate-900 hover:bg-slate-50"
                       >
-                        <div className="font-medium">{area.name}</div>
-                        {/* <div className="text-xs text-gray-400 line-clamp-1">
-                          {area.description.replace(/<[^>]*>/g, '')}
-                        </div> */}
+                        {area.name}
                       </Link>
                     ))
                   )}
                 </div>
               )}
             </div>
-            <Link href="/#contact" className="text-slate-700 hover:text-slate-900 transition-colors font-medium">
-              Contact
+
+            <Link 
+              href="/blogs" 
+              className="relative group px-4 py-2 text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:text-slate-900"
+            >
+              <span className="relative z-10">Insights</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-slate-900 group-hover:w-full transition-all duration-300"></div>
             </Link>
 
-            <Link href="/blogs" className="text-slate-700 hover:text-slate-900 transition-colors  font-medium">
-              Blogs
+            <Link 
+              href="/#contact" 
+              className="relative group px-4 py-2 text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-300 hover:text-slate-900"
+            >
+              <span className="relative z-10">Contact</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-slate-900 group-hover:w-full transition-all duration-300"></div>
             </Link>
-            <Link href="/appointments">
-            <button className="bg-amber-700 hover:bg-amber-800 px-6 py-2 rounded-lg ml-6 text-white transition-all hover:shadow-md font-medium text-sm">
-              Get Consultation
-            </button>
+
+            {/* CTA Button */}
+            <Link href="/appointments" className="ml-6 pl-6 border-l border-slate-200">
+              <button className="relative group px-6 py-2.5 rounded-full font-semibold text-xs tracking-[0.18em] uppercase text-white transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md bg-slate-900 hover:bg-slate-800">
+                <span className="relative z-10">Get Consultation</span>
+              </button>
             </Link>
           </div>
 
@@ -111,49 +145,65 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-slate-600 hover:text-slate-800"
+              className="transition-colors duration-300 p-2 text-slate-800 hover:text-slate-600"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden pb-4 space-y-2 border-t border-slate-100">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
+          <div className="md:hidden pb-6 space-y-1 border-t border-slate-200 bg-white animate-in slide-in-from-top-2 duration-200">
+            <Link 
+              href="/" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="block px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-slate-900 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-200 border-l-2 border-transparent hover:border-slate-900"
+            >
               Home
             </Link>
-            <Link href="/attorneys" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
-              Our Attorneys
+
+            <Link 
+              href="/about" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="block px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-slate-900 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-200 border-l-2 border-transparent hover:border-slate-900"
+            >
+              About
+            </Link>
+
+            <Link 
+              href="/attorneys" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="block px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-slate-900 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-200 border-l-2 border-transparent hover:border-slate-900"
+            >
+              Attorneys
             </Link>
 
             {/* Mobile Practice Areas */}
             <button
               onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
-              className="w-full text-left px-4 py-2 hover:bg-slate-50 rounded-md flex items-center justify-between text-slate-700 text-sm"
+              className="w-full text-left px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-slate-900 rounded-lg flex items-center justify-between text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-200 border-l-2 border-transparent hover:border-slate-900"
             >
               <span>Practice Areas</span>
-              <svg
-                className={`w-4 h-4 transition-transform ${isMobileDropdownOpen ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
+              <ChevronDown
+                className={`w-4 h-4 transition-all duration-500 ${
+                  isMobileDropdownOpen ? 'rotate-180 text-slate-900' : 'text-slate-500'
+                }`}
+              />
             </button>
 
             {isMobileDropdownOpen && (
-              <div className="bg-slate-50 rounded-md py-2 ml-4">
+              <div className="bg-slate-50 rounded-lg py-2 mx-3 border border-slate-200">
                 {loading ? (
-                  <div className="px-4 py-2 text-slate-500 text-center text-sm">Loading...</div>
+                  <div className="px-6 py-4 text-slate-500 text-center text-sm font-medium">Loading...</div>
                 ) : error ? (
-                  <div className="px-4 py-2 text-red-500 text-center text-sm">Error loading areas</div>
+                  <div className="px-6 py-4 text-red-500 text-center text-sm font-medium">Error loading areas</div>
                 ) : practiceAreas.length === 0 ? (
-                  <div className="px-4 py-2 text-slate-500 text-center text-sm">No practice areas available</div>
+                  <div className="px-6 py-4 text-slate-500 text-center text-sm">No practice areas available</div>
                 ) : (
                   practiceAreas.map((area) => (
                     <Link
@@ -163,27 +213,37 @@ export default function Navbar() {
                         setIsMobileDropdownOpen(false);
                         setIsMobileMenuOpen(false);
                       }}
-                      className="block px-4 py-2 hover:bg-slate-100 rounded transition-colors text-slate-700 text-sm"
+                      className="block px-6 py-3 text-slate-700 hover:text-slate-900 text-sm font-medium transition-all duration-200 border-l-2 border-transparent hover:border-slate-900 hover:bg-white"
                     >
-                      <div className="font-medium">{area.name}</div>
+                      {area.name}
                     </Link>
                   ))
                 )}
               </div>
             )}
 
-            <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
-              About
+            <Link 
+              href="/blogs" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="block px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-slate-900 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-200 border-l-2 border-transparent hover:border-slate-900"
+            >
+              Insights
             </Link>
-            <Link href="/blogs" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
-              Blogs
-            </Link>
-            <Link href="/#contact" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-md text-slate-700 text-sm">
+
+            <Link 
+              href="/#contact" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="block px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-slate-900 rounded-lg text-sm font-semibold tracking-[0.12em] uppercase transition-all duration-200 border-l-2 border-transparent hover:border-slate-900"
+            >
               Contact
             </Link>
+
             <Link href="/appointments">
-              <button onClick={() => setIsMobileMenuOpen(false)} className="w-full bg-slate-800 hover:bg-slate-900 px-4 py-2 rounded-md transition-colors font-medium mt-2 text-white text-sm">
-                Get Consultation
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="w-full relative group px-6 py-4 mt-4 mx-3 rounded-full font-semibold text-xs tracking-[0.18em] uppercase text-white transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md bg-slate-900 hover:bg-slate-800"
+              >
+                <span className="relative z-10">Get Consultation</span>
               </button>
             </Link>
           </div>
