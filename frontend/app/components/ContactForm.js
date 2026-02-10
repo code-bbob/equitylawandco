@@ -28,7 +28,7 @@ export default function ContactForm() {
     setSuccess(false);
 
     try {
-      const response = await fetch('http://localhost:8000/api/contact/', {
+      const response = await fetch('http://192.168.1.214:8000/api/contact/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

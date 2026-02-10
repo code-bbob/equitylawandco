@@ -26,8 +26,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 overflow-hidden bg-white/90 backdrop-blur-md border-b border-slate-200">
-      <div className="mx-auto px-4 sm:px-6 lg:px-12">
+    <nav className="sticky top-0 z-50 bg-orange-100/90 backdrop-blur-md border-b border-amber-200">
+      <div className="mx-auto px-4 sm:px-6 py-2 lg:px-12">
         <div className="flex justify-between items-center h-24 md:h-20">
           {/* Logo/Brand */}
           <Link 
@@ -45,7 +45,7 @@ export default function Navbar() {
             </div>
             <div className="hidden sm:flex flex-col leading-snug">
               <span className="text-lg sm:text-xl font-semibold text-slate-900 tracking-wide uppercase">Equity Law & Co.</span>
-              <span className="text-xs text-slate-500 tracking-[0.2em] uppercase">Attorneys at Law</span>
+              <span className="text-xs text-slate-500 ml-2 tracking-[0.2em] uppercase">Attorneys at Law</span>
             </div>
           </Link>
 
@@ -135,8 +135,8 @@ export default function Navbar() {
 
             {/* CTA Button */}
             <Link href="/appointments" className="ml-6 pl-6 border-l border-slate-200">
-              <button className="relative group px-6 py-2.5 rounded-full font-semibold text-xs tracking-[0.18em] uppercase text-white transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md bg-slate-900 hover:bg-slate-800">
-                <span className="relative z-10">Get Consultation</span>
+              <button className="relative group px-6 py-4 bg-blue-500 rounded-md font-semibold text-xs tracking-[0.18em] uppercase text-white transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md bg-slate-900 hover:bg-slate-800">
+                <span className="relative z-10">Book Appointments</span>
               </button>
             </Link>
           </div>

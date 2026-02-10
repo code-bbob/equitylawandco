@@ -4,7 +4,7 @@ import AppointmentForm from '@/app/components/AppointmentForm';
 
 export default function AppointmentsPage() {
   return (
-    <div>
+    <div className="bg-white">
       <AppointmentForm />
     </div>
   );

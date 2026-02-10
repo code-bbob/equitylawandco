@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-end justify-center overflow-hidden py-20">
+    <section className="relative min-h-[92vh] flex items-end justify-center overflow-hidden py-20">
       {/* Background Image - scrolls normally with page */}
       <div
         className="absolute inset-0 z-0"
@@ -15,12 +15,14 @@ export default function Hero() {
           backgroundPosition: "top 30% center",
         }}
       >
+                {/* <div className="absolute inset-0 bg-amber-100/0 mix-blend-multiply"></div> */}
+      
         {/* Sophisticated Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60"></div>
       </div>
 
       {/* Content positioned at bottom to avoid faces */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pb-24">
         {/* Refined Badge */}
         <div className="mb-6 inline-block">
           <span className="text-xs font-semibold text-amber-400 tracking-[0.15em] uppercase bg-black/30 py-2 px-4 rounded-lg backdrop-blur-md border border-amber-500/30 transition-all duration-300">

@@ -105,6 +105,7 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(AppointmentDay, AppointmentDayAdmin)
+admin.site.register(Attorney)
 
 
 class BlogAdmin(admin.ModelAdmin):

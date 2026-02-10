@@ -19,7 +19,7 @@ export default function AppointmentForm() {
     notes: ''
   });
 
-  const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.1.214:8000/api';
 
   // Load practice areas and available dates on mount
   useEffect(() => {
@@ -210,26 +210,24 @@ export default function AppointmentForm() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-50 via-white to-amber-50 relative overflow-hidden py-20 md:py-28">
-        {/* Decorative elements */}
+    <main className="bg-white">
+      {/* Hero Section - Compact */}
+      <section className="bg-gradient-to-br from-slate-50 via-white to-amber-50 relative overflow-hidden py-12 md:py-16">
         <div className="absolute top-0 right-0 w-96 h-96 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 -mr-48 -mt-48"></div>
-        <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-amber-50 rounded-full mix-blend-multiply filter blur-3xl opacity-10 -ml-40"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <span className="text-xs font-semibold text-amber-700 tracking-widest uppercase">Schedule Your Consultation</span>
-          <h1 className="text-5xl md:text-6xl font-serif font-bold text-slate-900 mt-4 mb-6">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-3 mb-4">
             Book an Appointment
           </h1>
-          <p className="text-xl text-slate-700 leading-relaxed max-w-2xl mx-auto">
-            Connect with our legal team to discuss your case and explore how we can help you achieve your goals.
+          <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+            Connect with our legal team to discuss your case and explore how we can help.
           </p>
         </div>
       </section>
 
-      {/* Form Section */}
-      <section className="py-20 md:py-28 bg-white relative">
+      {/* Form Section - Compact */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Alert Messages */}
           {error && (
@@ -249,11 +247,11 @@ export default function AppointmentForm() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-12">
+          <form onSubmit={handleSubmit} className="space-y-8">
             {/* Personal Information Section */}
             <div>
-              <div className="mb-8">
-                <h2 className="text-2xl font-serif font-bold text-slate-900 mb-2">Your Information</h2>
+              <div className="mb-6">
+                <h2 className="text-xl font-serif font-bold text-slate-900 mb-2">Your Information</h2>
                 <div className="w-12 h-1 bg-gradient-to-r from-amber-700 to-amber-500 rounded"></div>
               </div>
               
@@ -304,8 +302,8 @@ export default function AppointmentForm() {
 
             {/* Appointment Details Section */}
             <div>
-              <div className="mb-8">
-                <h2 className="text-2xl font-serif font-bold text-slate-900 mb-2">Appointment Details</h2>
+              <div className="mb-6">
+                <h2 className="text-xl font-serif font-bold text-slate-900 mb-2">Appointment Details</h2>
                 <div className="w-12 h-1 bg-gradient-to-r from-amber-700 to-amber-500 rounded"></div>
               </div>
 
@@ -421,8 +419,8 @@ export default function AppointmentForm() {
 
             {/* Additional Notes Section */}
             <div>
-              <div className="mb-8">
-                <h2 className="text-2xl font-serif font-bold text-slate-900 mb-2">Additional Information</h2>
+              <div className="mb-6">
+                <h2 className="text-xl font-serif font-bold text-slate-900 mb-2">Additional Information</h2>
                 <div className="w-12 h-1 bg-gradient-to-r from-amber-700 to-amber-500 rounded"></div>
               </div>
 
@@ -434,14 +432,14 @@ export default function AppointmentForm() {
                   value={formData.notes}
                   onChange={handleInputChange}
                   placeholder="Tell us about your legal matter, your concerns, and any specific details that would be helpful for your consultation..."
-                  rows={6}
+                  rows={4}
                   className="px-4 py-3 border border-slate-200 rounded-lg text-slate-900 font-inherit transition-all bg-slate-50 focus:outline-none focus:border-amber-600 focus:bg-white focus:ring-2 focus:ring-amber-600/30 placeholder:text-slate-400 resize-none"
                 />
               </div>
             </div>
 
             {/* Submit Button */}
-            <div className="pt-8 border-t border-slate-200">
+            <div className="pt-6 border-t border-slate-200">
               <button
                 type="submit"
                 disabled={loading}
@@ -467,15 +465,14 @@ export default function AppointmentForm() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 md:py-28 bg-gradient-to-r from-amber-700 to-amber-800 relative overflow-hidden">
-        {/* Background pattern */}
+      <section className="py-12 md:py-16 bg-gradient-to-r from-amber-700 to-amber-800 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 1px)', backgroundSize: '50px 50px'}}></div>
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-3">
             Questions Before Booking?
           </h2>
-          <p className="text-lg text-amber-50 mb-10 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base text-amber-50 mb-8 leading-relaxed max-w-2xl mx-auto">
             Feel free to reach out to us directly. Our team is ready to answer any questions you may have.
           </p>
           <a
