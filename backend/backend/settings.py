@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'pages',
     'blogs',
-    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -123,15 +122,10 @@ USE_I18N = True
 USE_TZ = True
 
 
-#Email stuff
-
-EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
-
-ANYMAIL = {
-    "SENDINBLUE_API_KEY": os.getenv("SENDINBLUE_API_KEY"),
-}
-
-DEFAULT_FROM_EMAIL = '"Equity Law & Co." <contact@equitylawandco.com>'
+# Brevo API v3 (direct API calls, no SMTP)
+BREVO_API_KEY = os.getenv("SENDINBLUE_API_KEY")
+DEFAULT_FROM_EMAIL_ADDRESS = "contact@equitylawandco.com"
+DEFAULT_FROM_EMAIL_NAME = "Equity Law & Co."
 
 
 

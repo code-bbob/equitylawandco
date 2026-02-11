@@ -1,7 +1,28 @@
 import threading
-from django.core.mail import send_mail
+import requests
 from django.conf import settings
 from datetime import datetime, timedelta
+
+
+def send_brevo_email(to_email, subject, html_content):
+    """Send email using Brevo API v3 instead of SMTP"""
+    url = "https://api.brevo.com/v3/smtp/email"
+
+    headers = {
+        "accept": "application/json",
+        "api-key": settings.BREVO_API_KEY,
+        "content-type": "application/json"
+    }
+
+    payload = {
+        "sender": {"email": settings.DEFAULT_FROM_EMAIL_ADDRESS, "name": settings.DEFAULT_FROM_EMAIL_NAME},
+        "to": [{"email": to_email}],
+        "subject": subject,
+        "htmlContent": html_content
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+    return response.status_code, response.text
 
 
 def send_contact_email_async(name, email, message):
@@ -62,13 +83,10 @@ def send_contact_email_async(name, email, message):
             </html>
             """
             
-            send_mail(
+            send_brevo_email(
+                'equitylawandco@gmail.com',
                 admin_subject,
-                "",  # Plain text fallback
-                settings.DEFAULT_FROM_EMAIL,
-                ['equitylawandco@gmail.com'],
-                html_message=admin_html_message,
-                fail_silently=False,
+                admin_html_message,
             )
             
             # Confirmation email to user
@@ -145,13 +163,10 @@ def send_contact_email_async(name, email, message):
             </html>
             """
             
-            send_mail(
+            send_brevo_email(
+                email,
                 user_subject,
-                "",  # Plain text fallback
-                settings.DEFAULT_FROM_EMAIL,
-                [email],
-                html_message=user_html_message,
-                fail_silently=False,
+                user_html_message,
             )
         except Exception as e:
             print(f"Error sending email: {str(e)}")
@@ -254,13 +269,10 @@ def send_appointment_confirmation_email(appointment):
             </html>
             """
             
-            send_mail(
+            send_brevo_email(
+                appointment.client_email,
                 client_subject,
-                "",  # Plain text fallback
-                settings.DEFAULT_FROM_EMAIL,
-                [appointment.client_email],
-                html_message=client_html_message,
-                fail_silently=False,
+                client_html_message,
             )
             
             # Email to admin
@@ -328,13 +340,10 @@ def send_appointment_confirmation_email(appointment):
             </html>
             """
             
-            send_mail(
+            send_brevo_email(
+                'equitylawandco@gmail.com',
                 admin_subject,
-                "",  # Plain text fallback
-                settings.DEFAULT_FROM_EMAIL,
-                ['equitylawandco@gmail.com'],
-                html_message=admin_html_message,
-                fail_silently=False,
+                admin_html_message,
             )
             
             # Mark as confirmation sent
