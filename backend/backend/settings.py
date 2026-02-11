@@ -139,6 +139,10 @@ DEFAULT_FROM_EMAIL = '"Equity Law & Co." <contact@equitylawandco.com>'
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Media Files Configuration
 MEDIA_URL = '/media/'
