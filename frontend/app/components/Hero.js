@@ -1,20 +1,53 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
+  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const isReady = imagesLoaded >= 2;
+
   return (
-    <section className="relative h-[90svh] flex flex-col justify-end overflow-hidden">
-      {/* Background Image */}
+    <section className="relative h-[90svh] md:h-[95svh] flex flex-col justify-end overflow-hidden">
+      {/* Loading Screen — shown until both images are loaded */}
       <div
-        className="
-          absolute inset-0 z-0
-          bg-[url('/images/equitycoververtical.jpg')]
-          md:bg-[url('/images/equitycover.jpg')]
-          bg-cover
-          bg-[position:top_30%_center]
-        "
+        className={`fixed h-screen top-0 inset-0 z-50 bg-amber-50 flex flex-col items-center justify-center transition-opacity duration-700 ${
+          isReady ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
       >
+        <Image
+          src="/images/image.svg"
+          alt="Equity Law & Co Logo"
+          width={100}
+          height={100}
+          priority
+          className="animate-pulse"
+        />
+      </div>
+
+      {/* Background Image — using Next.js Image with priority for instant load */}
+      <div className="absolute inset-0 z-0">
+        {/* Mobile image */}
+        <Image
+          src="/images/equitycoververtical.jpg"
+          alt="Equity Law & Co. attorneys"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_30%] md:hidden"
+          onLoad={() => setImagesLoaded((c) => c + 1)}
+        />
+        {/* Desktop image */}
+        <Image
+          src="/images/equitycover.jpg"
+          alt="Equity Law & Co. attorneys"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_30%] hidden md:block"
+          onLoad={() => setImagesLoaded((c) => c + 1)}
+        />
         <div className="absolute inset-0 md:hidden bg-slate-700/90 mix-blend-multiply"></div>
 
         {/* Gradient overlay — stronger at bottom where text sits */}
