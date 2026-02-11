@@ -1,77 +1,75 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] sm:min-h-[90vh] md:min-h-[92vh] flex items-end justify-center overflow-hidden py-12 sm:py-20">
-      {/* Background Image - scrolls normally with page */}
-      {/* <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: "url(/images/equitycoververtical.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "top 30% center",
-        }}
-      > */}
+    <section className="relative h-[90svh] flex flex-col justify-end overflow-hidden">
+      {/* Background Image */}
       <div
         className="
-    absolute inset-0 z-0
-    bg-[url('/images/equitycoververtical.jpg')]
-    md:bg-[url('/images/equitycover.jpg')]
-    bg-cover
-    bg-[position:top_30%_center]
-  "
+          absolute inset-0 z-0
+          bg-[url('/images/equitycoververtical.jpg')]
+          md:bg-[url('/images/equitycover.jpg')]
+          bg-cover
+          bg-[position:top_30%_center]
+        "
       >
         <div className="absolute inset-0 md:hidden bg-slate-700/90 mix-blend-multiply"></div>
 
-        {/* Sophisticated Overlay */}
+        {/* Gradient overlay — stronger at bottom where text sits */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60"></div>
       </div>
 
-      {/* Content positioned at bottom to avoid faces */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 md:pb-24">
-        {/* Refined Badge */}
-        <div className="mb-6 inline-block">
-          <span className="text-xs font-semibold text-amber-400 tracking-[0.15em] uppercase bg-black/30 py-2 px-4 rounded-lg backdrop-blur-md border border-amber-500/30 transition-all duration-300">
-            Excellence in Legal Services
-          </span>
-        </div>
+      {/* Content — pinned to bottom with percentage-based spacing */}
+      <div
+        className="relative z-10 w-full text-center px-[5%] pb-[18vh] md:pb-[8%]"
+      >
+        <div className="max-w-4xl mx-auto">
+          {/* Refined Badge */}
+          <div className="mb-[1vh] md:mb-[2vh] inline-block">
+            <span className="text-[clamp(0.625rem,1.2vw,0.75rem)] font-semibold text-amber-400 tracking-[0.15em] uppercase bg-black/30 py-[0.5em] px-[1em] rounded-lg backdrop-blur-md border border-amber-500/30 transition-all duration-300">
+              Excellence in Legal Services
+            </span>
+          </div>
 
-        {/* Professional Headline */}
-        <div className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold mb-4 sm:mb-6 leading-tight text-white tracking-tight drop-shadow-lg max-w-4xl mx-auto">
-          Your Trusted Legal <span className="text-amber-400">Partner</span>
-        </div>
+          {/* Professional Headline — fluid font size */}
+          <div className="text-[clamp(1.75rem,5vw,3.75rem)] font-serif font-bold mb-[1.5vh] leading-[1.15] text-white tracking-tight drop-shadow-lg">
+            Your Trusted Legal <span className="text-amber-400">Partner</span>
+          </div>
 
-        {/* Description - Clean and Professional */}
-        <p className="text-sm sm:text-base md:text-lg text-white/90 mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
-          Practical, reliable, and result-oriented legal solutions founded on
-          the principles of fairness, diligence, responsiveness, and equity.
-        </p>
+          {/* Description */}
+          <p className="text-[clamp(0.8rem,1.8vw,1.125rem)] text-white/90 mb-[1.5vh] md:mb-[3vh] max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
+            Practical, reliable, and result-oriented legal solutions founded on
+            the principles of fairness, diligence, responsiveness, and equity.
+          </p>
 
-        {/* Simplified CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link href="/appointments" className="w-full">
-            <button className="px-8 w-full py-3 rounded-lg font-semibold text-base text-white bg-amber-600 hover:bg-amber-700 transition-all duration-300 hover:shadow-lg active:scale-95 backdrop-blur-sm">
-              Schedule Consultation
-            </button>
-          </Link>
-          <Link href="/about" className="w-full">
-            <button className="px-8 py-3 w-full md:block rounded-lg font-semibold text-base text-white border border-white/40 hover:border-amber-400/60 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
-              Learn More
-            </button>
-          </Link>
+          {/* CTA Buttons — percentage-based max-widths */}
+          <div className="flex flex-col sm:flex-row gap-[1.5vh] sm:gap-[2%] justify-center items-center max-w-[90%] sm:max-w-[70%] md:max-w-[60%] mx-auto">
+            <Link href="/appointments" className="w-full sm:w-1/2">
+              <button className="w-full py-[1.4vh] rounded-lg font-semibold text-[clamp(0.8rem,1.5vw,1rem)] text-white bg-amber-600 hover:bg-amber-700 transition-all duration-300 hover:shadow-lg active:scale-95 backdrop-blur-sm">
+                Schedule Consultation
+              </button>
+            </Link>
+            <Link href="/about" className="w-full sm:w-1/2">
+              <button className="w-full py-[1.4vh] rounded-lg font-semibold text-[clamp(0.8rem,1.5vw,1rem)] text-white border border-white/40 hover:border-amber-400/60 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+                Learn More
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Scroll Indicator - Enhanced */}
-      <div className="hidden sm:flex absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-70 hover:opacity-100 transition-opacity flex-col items-center gap-2 cursor-pointer">
-        <span className="text-xs text-amber-200 font-semibold tracking-widest uppercase">
+      {/* Scroll Indicator */}
+      <div
+        className="hidden sm:flex absolute left-1/2 -translate-x-1/2 opacity-70 hover:opacity-100 transition-opacity flex-col items-center gap-[0.5vh] cursor-pointer"
+        style={{ bottom: '2.5%' }}
+      >
+        <span className="text-[clamp(0.55rem,0.9vw,0.7rem)] text-amber-200 font-semibold tracking-widest uppercase">
           Scroll to explore
         </span>
         <svg
-          className="w-5 h-5 text-white animate-bounce"
+          className="w-[1.2vw] min-w-4 h-[1.2vw] min-h-4 text-white animate-bounce"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
