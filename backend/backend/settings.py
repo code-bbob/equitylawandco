@@ -140,9 +140,7 @@ DEFAULT_FROM_EMAIL = '"Equity Law & Co." <contact@equitylawandco.com>'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+
 
 # Media Files Configuration
 MEDIA_URL = '/media/'
