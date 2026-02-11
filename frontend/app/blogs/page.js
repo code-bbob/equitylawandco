@@ -42,8 +42,8 @@ export default function BlogsPage() {
   return (
     <div className="min-h-screen bg-amber-50">
       {/* Header Section */}
-      <section className="bg-gradient-to-r from-amber-900 to-amber-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-[url('/images/banner4.jpg')] bg-cover bg-[50%_60%] text-white py-16">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-44">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Legal Insights & News</h1>
           <p className="text-lg text-amber-100 max-w-2xl">
             Stay informed with our latest articles on legal matters, industry insights, and updates that matter to you.
@@ -53,7 +53,7 @@ export default function BlogsPage() {
 
       {/* Blogs List Section */}
       <section className="py-16">
-        <div className="max-w-7xl mx-auto ">
+        <div className="px-44 mx-auto ">
           {blogs.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-xl text-amber-800">No blogs available at this time.</p>
@@ -61,6 +61,7 @@ export default function BlogsPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogs.map((blog) => (
+              <Link href={`/blogs/${blog.slug}`}>
                 <article
                   key={blog.id}
                   className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-amber-100"
@@ -104,14 +105,13 @@ export default function BlogsPage() {
                     </div>
 
                     {/* Read More Link */}
-                    <Link href={`/blogs/${blog.slug}`}>
                       <button className="inline-flex items-center text-amber-700 hover:text-amber-900 font-semibold group">
                         Read More
                         <ChevronRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                       </button>
-                    </Link>
                   </div>
                 </article>
+                    </Link>
               ))}
             </div>
           )}

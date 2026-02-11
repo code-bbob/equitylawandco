@@ -24,7 +24,7 @@ class PracticeAreaSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = PracticeArea
-        fields = ['id', 'name', 'description', 'featured_image', 'featured_image_url', 'gallery_images']
+        fields = ['id', 'name', 'slug', 'description', 'featured_image', 'featured_image_url', 'gallery_images']
     
     def get_featured_image_url(self, obj):
         if obj.featured_image:

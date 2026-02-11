@@ -13,6 +13,7 @@ from .utils import send_contact_email_async, send_appointment_confirmation_email
 class PracticeAreaViewSet(viewsets.ModelViewSet):
     queryset = PracticeArea.objects.all()
     serializer_class = PracticeAreaSerializer
+    lookup_field = 'slug'
     search_fields = ['name', 'description']
     ordering_fields = ['name', 'id']
     ordering = ['name']

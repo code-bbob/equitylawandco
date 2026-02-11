@@ -78,11 +78,27 @@ class AvailableHours(models.Model):
 
 class PracticeArea(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, help_text="URL-friendly identifier")
     description = CKEditor5Field()
     featured_image = models.ImageField(upload_to='practice_areas/', null=True, blank=True, help_text="Main image displayed at the top of the page")
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            
+            # Handle duplicates by adding a number suffix
+            counter = 1
+            while PracticeArea.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            
+            self.slug = slug
+        
+        super().save(*args, **kwargs)
     
     class Meta:
         verbose_name_plural = "Practice Areas"

@@ -53,30 +53,31 @@ export default function AttorneyDetailsPage() {
           <section className=" pt-16">
             <div className="mx-auto px-8 lg:px-16 xl:px-24">
               <div className="text-xl text-slate-900">
-                <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
+                <Link href="/" className="hover:text-blue-700 text-gray-600 transition-colors">Home</Link>
                 <span className="mx-2">›</span>
-                <Link href="/attorneys" className="hover:text-cyan-400 transition-colors">Attorneys</Link>
+                <Link href="/attorneys" className="hover:text-blue-700 text-gray-600 transition-colors">Attorneys</Link>
                 <span className="mx-2">›</span>
-                <span className="text-black">{attorney.full_name}</span>
+                <span className="text-black font-semibold">{attorney.full_name}</span>
               </div>
             </div>
           </section>
 
           {/* Main White Content Section */}
-          <section className="bg-white py-16">
+          <section className=" py-16">
             <div className="mx-auto px-8 lg:px-16 xl:px-24">
               <div className="flex flex-col lg:flex-row gap-12 items-start">
                 {/* Left - Small Square Image */}
                 <div className="flex-shrink-0">
                   {attorney.photo_url ? (
-                    <div className="relative">
+                    <div className="relative w-72 h-72 lg:w-96 lg:h-96">
                       <Image
                         src={attorney.photo_url}
                         alt={attorney.full_name}
-                        width={320}
-                        height={320}
+                        fill
+                        className="object-cover object-[50%_10%] rounded-lg shadow-xl"
+                        priority
                         unoptimized
-                        className="w-72 h-72 lg:w-96 lg:h-96 object-cover rounded-lg shadow-xl"
+                        sizes="(max-width: 1024px) 288px, 384px"
                       />
                     </div>
                   ) : (
@@ -152,20 +153,19 @@ export default function AttorneyDetailsPage() {
 
           {/* Professional Background Section */}
           {attorney.professional_background && (
-            <section className="bg-white pb-16 border-t border-slate-100">
-              <div className="mx-auto px-8 lg:px-16 xl:px-24">
-                <div className="max-w-4xl">
+              <div className="mx-auto px-8 pb-10 lg:px-16 xl:px-24">
+                <div className="max-w-5xl">
                   <h2 className="text-3xl font-serif font-bold text-slate-900 mb-8">
                     Professional Background
                   </h2>
                   <div className="prose prose-lg max-w-none">
-                    <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
+                    <p className="text-slate-700 leading-relaxed text-justify ">
                       {attorney.professional_background}
                     </p>
                   </div>
                 </div>
               </div>
-            </section>
+            
           )}
 
           {/* CTA Section */}

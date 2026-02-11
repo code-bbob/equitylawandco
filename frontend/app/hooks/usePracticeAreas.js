@@ -10,7 +10,8 @@ export function usePracticeAreas() {
   useEffect(() => {
     const fetchPracticeAreas = async () => {
       try {
-        const response = await fetch('http://192.168.1.214:8000/api/practice-areas/');
+        const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+        const response = await fetch(`${API_BASE_URL}/practice-areas/`);
         if (!response.ok) {
           throw new Error('Failed to fetch practice areas');
         }

@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-orange-100/90 backdrop-blur-md border-b border-amber-200">
-      <div className="mx-auto px-4 sm:px-6 py-2 lg:px-12">
+      <div className="mx-auto px-4 sm:px-6 py-2 lg:px-24">
         <div className="flex justify-between items-center h-24 md:h-20">
           {/* Logo/Brand */}
           <Link 
@@ -93,7 +93,7 @@ export default function Navbar() {
 
               {/* Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="absolute top-full left-2 mt-4 w-72 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                <div className="absolute top-full left-2 mt-4 w-72 bg-orange-100 rounded-xl shadow-xl border border-slate-200 py-2 z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                   
                   {loading ? (
                     <div className="px-6 py-4 text-slate-500 text-center text-sm font-medium">Loading...</div>
@@ -105,7 +105,7 @@ export default function Navbar() {
                     practiceAreas.map((area) => (
                       <Link
                         key={area.id}
-                        href={`/practice-areas/${area.id}`}
+                        href={`/practice-areas/${area.slug}`}
                         onClick={() => setIsDropdownOpen(false)}
                         className="block px-6 py-3 text-slate-700 hover:text-slate-900 text-sm font-medium transition-all duration-200 border-l-2 border-transparent hover:border-slate-900 hover:bg-slate-50"
                       >
@@ -208,7 +208,7 @@ export default function Navbar() {
                   practiceAreas.map((area) => (
                     <Link
                       key={area.id}
-                      href={`/practice-areas/${area.id}`}
+                      href={`/practice-areas/${area.slug}`}
                       onClick={() => {
                         setIsMobileDropdownOpen(false);
                         setIsMobileMenuOpen(false);

@@ -22,7 +22,7 @@ export default function AttorneyCard({ attorney }) {
 
   return (
     <Link href={`/attorneys/${slug}`}>
-      <div className="group cursor-pointer text-center">
+      <div className="group cursor-pointer py-10 text-center">
         {/* Circular Photo */}
         <div className="mb-6 flex justify-center relative z-10">
           <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:shadow-xl transition-shadow">
@@ -30,7 +30,7 @@ export default function AttorneyCard({ attorney }) {
               <img
                 src={photo_url}
                 alt={full_name}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                className="w-full h-full object-cover object-[50%_10%] rounded-lg shadow-xl group-hover:scale-110 transition-transform duration-300"
               />
             ) : (
               <div className="w-full h-full bg-slate-300 flex items-center justify-center">
@@ -41,7 +41,7 @@ export default function AttorneyCard({ attorney }) {
         </div>
         
         {/* Colored Card Background */}
-        <div className={`${bgColor} rounded-md shadow-md hover:shadow-lg transition-all group-hover:scale-105 -mt-20 pt-16 pb-8 px-6`}>
+        <div className={`${bgColor} rounded-md shadow-md hover:shadow-lg transition-all group-hover:scale-105 -mt-20 pt-16 pb-8 px-6 md:h-48`}>
           <h3 className="text-lg font-semibold text-slate-900">
             {full_name}
           </h3>

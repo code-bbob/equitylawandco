@@ -58,7 +58,7 @@ export default function PracticeAreasPreview() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {displayedAreas.map((area) => (
-                <Link key={area.id} href={`/practice-areas/${area.id}`}>
+                <Link key={area.id} href={`/practice-areas/${area.slug}`}>
                   <div className="group bg-white hover:bg-gradient-to-br hover:from-amber-50/40 hover:to-white rounded-xl p-8 transition-all duration-500 cursor-pointer border border-slate-100 hover:border-amber-200/50 h-full flex flex-col relative overflow-hidden">
                     {/* Subtle top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-amber-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

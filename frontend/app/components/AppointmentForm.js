@@ -19,7 +19,7 @@ export default function AppointmentForm() {
     notes: ''
   });
 
-  const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.1.214:8000/api';
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
   // Load practice areas and available dates on mount
   useEffect(() => {

@@ -28,7 +28,8 @@ export default function ContactForm() {
     setSuccess(false);
 
     try {
-      const response = await fetch('http://192.168.1.214:8000/api/contact/', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+      const response = await fetch(`${API_URL}/contact/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

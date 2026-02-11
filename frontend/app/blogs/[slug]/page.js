@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useBlog } from '../../hooks/useBlog';
-import { Calendar, User, ArrowLeft } from 'lucide-react';
+import { Calendar, User, ChevronRight } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
 export default function BlogDetailPage() {
@@ -42,12 +42,17 @@ export default function BlogDetailPage() {
     return (
       <div className="min-h-screen bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <Link href="/blogs">
-            <button className="inline-flex items-center text-amber-700 hover:text-amber-900 font-semibold mb-8">
-              <ArrowLeft size={18} className="mr-2" />
-              Back to Blogs
-            </button>
-          </Link>
+          <div className="flex items-center space-x-2 text-md text-amber-700 mb-8">
+            <Link href="/" className="hover:text-amber-900 transition-colors">
+              Home
+            </Link>
+            <ChevronRight size={16} />
+            <Link href="/blogs" className="hover:text-amber-900 transition-colors">
+              Blogs
+            </Link>
+            <ChevronRight size={16} />
+            <span className="text-amber-900 font-semibold">Article:{blog.title}</span>
+          </div>
 
           <div className="bg-red-50 border border-red-200 rounded-lg p-8 text-center">
             <p className="text-red-700 text-lg">
@@ -61,15 +66,20 @@ export default function BlogDetailPage() {
 
   return (
     <div className="min-h-screen bg-amber-50">
-      {/* Back Link */}
-      <div className="bg-white border-b border-amber-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/blogs">
-            <button className="inline-flex items-center text-amber-700 hover:text-amber-900 font-semibold transition-colors">
-              <ArrowLeft size={18} className="mr-2" />
-              Back to Blogs
-            </button>
-          </Link>
+      {/* Breadcrumbs */}
+      <div className="py-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center space-x-2 text-md text-amber-700">
+            <Link href="/" className="hover:text-amber-900 transition-colors">
+              Home
+            </Link>
+            <ChevronRight size={16} />
+            <Link href="/blogs" className="hover:text-amber-900 transition-colors">
+              Blogs
+            </Link>
+            <ChevronRight size={16} />
+            <span className="text-amber-900 font-semibold">Article: {blog.title}</span>
+          </nav>
         </div>
       </div>
 
@@ -127,10 +137,10 @@ export default function BlogDetailPage() {
           </div>
 
           {/* Author Info Card */}
-          <div className="mt-12 bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg p-6 border border-amber-200">
-            <h3 className="text-xl font-bold text-amber-900 mb-2">About the Author</h3>
-            <p className="text-amber-800">
-              {blog.author} is a legal professional with expertise in various areas of law. This article reflects their professional insights and analysis.
+          <div className="mt-12 bg-orange-100 rounded-lg p-8 border border-amber-200 shadow-md">
+            <h3 className="text-lg font-bold text-amber-900 mb-3">About the Author</h3>
+            <p className="text-amber-800 leading-relaxed">
+              <span className='font-bold'>{blog.author}</span> is a legal professional with expertise in various areas of law. This article reflects their professional insights and analysis.
             </p>
           </div>
 

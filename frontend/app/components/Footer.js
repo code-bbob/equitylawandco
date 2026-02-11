@@ -25,9 +25,9 @@ export default function Footer() {
           <div className="border-l-2 border-amber-500 pl-6">
             <h4 className="text-amber-900 font-bold text-lg mb-5">Contact</h4>
             <ul className="space-y-3 text-sm">
-              <li><span className="text-amber-700 font-semibold">Email:</span> <a href="mailto:info@equitylaw.com" className="text-amber-800 hover:text-amber-900 hover:underline font-medium transition-colors">info@equitylaw.com</a></li>
-              <li><span className="text-amber-700 font-semibold">Phone:</span> <a href="tel:+15551234567" className="text-amber-800 hover:text-amber-900 hover:underline font-medium transition-colors">(555) 123-4567</a></li>
-              <li><span className="text-amber-700 font-semibold">Address:</span> <span className="text-amber-800 font-medium">123 Legal Ave, Suite 100</span></li>
+              <li><span className="text-amber-700 font-semibold">Email:</span> <a href="mailto:contact@equitylawandco.com" className="text-amber-800 hover:text-amber-900 hover:underline font-medium transition-colors">contact@equitylawandco.com</a></li>
+              <li><span className="text-amber-700 font-semibold">Phone:</span> <a href="tel:+15551234567" className="text-amber-800 hover:text-amber-900 hover:underline font-medium transition-colors">(977) 9841052926</a></li>
+              <li><span className="text-amber-700 font-semibold">Address:</span> <span className="text-amber-800 font-medium">Thapagaun, Kathmandu, Nepal</span></li>
             </ul>
           </div>
 
@@ -35,9 +35,9 @@ export default function Footer() {
           <div className="border-l-2 border-amber-400 pl-6">
             <h4 className="text-amber-900 font-bold text-lg mb-5">Follow Us</h4>
             <div className="flex space-x-3">
-              <a href="#" className="h-10 w-10 rounded-lg bg-amber-700 hover:bg-amber-800 transition-colors flex items-center justify-center text-sm text-white font-bold border border-amber-600">in</a>
+              <a href="https://www.linkedin.com/company/112077642/admin/dashboard/" className="h-10 w-10 rounded-lg bg-amber-700 hover:bg-amber-800 transition-colors flex items-center justify-center text-sm text-white font-bold border border-amber-600">in</a>
               <a href="#" className="h-10 w-10 rounded-lg bg-amber-700 hover:bg-amber-800 transition-colors flex items-center justify-center text-sm text-white font-bold border border-amber-600">𝕏</a>
-              <a href="#" className="h-10 w-10 rounded-lg bg-amber-700 hover:bg-amber-800 transition-colors flex items-center justify-center text-sm text-white font-bold border border-amber-600">f</a>
+              <a href="https://www.facebook.com/profile.php?id=61587639966986" className="h-10 w-10 rounded-lg bg-amber-700 hover:bg-amber-800 transition-colors flex items-center justify-center text-sm text-white font-bold border border-amber-600">f</a>
             </div>
           </div>
         </div>
