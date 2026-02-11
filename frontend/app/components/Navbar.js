@@ -2,15 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { usePracticeAreas } from '../hooks/usePracticeAreas';
 import Image from 'next/image';
 import { ChevronDown, Menu, X } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ practiceAreas = [] }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { practiceAreas, loading, error } = usePracticeAreas();
   const dropdownRef = useRef(null);
 
   // Close dropdown when clicking outside
@@ -28,7 +26,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-orange-100/90 backdrop-blur-md border-b border-amber-200">
       <div className="mx-auto px-4 sm:px-6 py-2 lg:px-24">
-        <div className="flex justify-between items-center h-24 md:h-20">
+        <div className="flex justify-between items-center sm:h-20">
           {/* Logo/Brand */}
           <Link 
             href="/" 
@@ -50,7 +48,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-1 text-slate-700">
+          <div className="hidden 2xl:flex items-center space-x-1 text-slate-700">
             {/* Navigation Links */}
             <Link 
               href="/" 
@@ -94,12 +92,7 @@ export default function Navbar() {
               {/* Dropdown Menu */}
               {isDropdownOpen && (
                 <div className="absolute top-full left-2 mt-4 w-72 bg-orange-100 rounded-xl shadow-xl border border-slate-200 py-2 z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-                  
-                  {loading ? (
-                    <div className="px-6 py-4 text-slate-500 text-center text-sm font-medium">Loading...</div>
-                  ) : error ? (
-                    <div className="px-6 py-4 text-red-500 text-center text-sm font-medium">Error loading areas</div>
-                  ) : practiceAreas.length === 0 ? (
+                  {practiceAreas.length === 0 ? (
                     <div className="px-6 py-4 text-slate-500 text-center text-sm">No practice areas available</div>
                   ) : (
                     practiceAreas.map((area) => (
@@ -142,7 +135,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="2xl:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="transition-colors duration-300 p-2 text-slate-800 hover:text-slate-600"
@@ -158,7 +151,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden pb-6 space-y-1 border-t border-slate-200 bg-white animate-in slide-in-from-top-2 duration-200">
+          <div className="2xl:hidden pb-6 space-y-1 mt-4 border-t border-amber-200 bg-orange-100 animate-in slide-in-from-top-2 duration-200 pt-2">
             <Link 
               href="/" 
               onClick={() => setIsMobileMenuOpen(false)} 
@@ -197,12 +190,8 @@ export default function Navbar() {
             </button>
 
             {isMobileDropdownOpen && (
-              <div className="bg-slate-50 rounded-lg py-2 mx-3 border border-slate-200">
-                {loading ? (
-                  <div className="px-6 py-4 text-slate-500 text-center text-sm font-medium">Loading...</div>
-                ) : error ? (
-                  <div className="px-6 py-4 text-red-500 text-center text-sm font-medium">Error loading areas</div>
-                ) : practiceAreas.length === 0 ? (
+              <div className="bg-orange-100 rounded-lg py-2 mx-3 border border-gray-400">
+                {practiceAreas.length === 0 ? (
                   <div className="px-6 py-4 text-slate-500 text-center text-sm">No practice areas available</div>
                 ) : (
                   practiceAreas.map((area) => (
@@ -238,10 +227,10 @@ export default function Navbar() {
               Contact
             </Link>
 
-            <Link href="/appointments">
+            <Link href="/appointments" className="block px-3 mt-2">
               <button 
                 onClick={() => setIsMobileMenuOpen(false)} 
-                className="w-full relative group px-6 py-4 mt-4 mx-3 rounded-full font-semibold text-xs tracking-[0.18em] uppercase text-white transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md bg-slate-900 hover:bg-slate-800"
+                className="w-full relative group px-6 py-4 rounded-lg font-semibold text-xs tracking-[0.18em] uppercase text-white transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md bg-slate-900 hover:bg-slate-800"
               >
                 <span className="relative z-10">Get Consultation</span>
               </button>

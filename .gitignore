@@ -62,6 +62,9 @@ out/
 .npm
 .eslintcache
 
+# Cached images (downloaded at build time)
+frontend/public/cached-images/
+
 # OS
 .DS_Store
 .DS_Store?

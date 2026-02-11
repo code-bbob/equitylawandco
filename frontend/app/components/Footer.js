@@ -2,11 +2,11 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-orange-100 py-16 border-t-1 border-amber-700">
+    <footer className="bg-orange-100 py-10 sm:py-16 border-t-1 border-amber-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
           {/* Company Info */}
-          <div className=" border-amber-700 pl-6">
+          <div className="border-l-2 border-amber-700 pl-6">
             <h3 className="text-amber-900 font-bold text-xl mb-3">Equity Law & Co</h3>
             <p className="text-amber-800 text-sm leading-relaxed">Leading the legal industry with integrity, expertise, and excellence for over 20 years.</p>
           </div>
@@ -42,7 +42,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t-2 border-amber-200 pt-8 text-center text-sm text-amber-700">
+        <div className="border-t-2 border-amber-200 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-amber-700">
           <p><span className="font-semibold">&copy; 2025 Equity Law & Co.</span> All rights reserved. <span className="mx-2">•</span> <a href="#" className="hover:text-amber-900 hover:underline font-medium transition-colors">Privacy Policy</a> <span className="mx-2">•</span> <a href="#" className="hover:text-amber-900 hover:underline font-medium transition-colors">Terms</a></p>
         </div>
       </div>

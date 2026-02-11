@@ -25,7 +25,7 @@ export default function AttorneyCard({ attorney }) {
       <div className="group cursor-pointer py-10 text-center">
         {/* Circular Photo */}
         <div className="mb-6 flex justify-center relative z-10">
-          <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:shadow-xl transition-shadow">
+          <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:shadow-xl transition-shadow">
             {photo_url ? (
               <img
                 src={photo_url}
@@ -41,7 +41,7 @@ export default function AttorneyCard({ attorney }) {
         </div>
         
         {/* Colored Card Background */}
-        <div className={`${bgColor} rounded-md shadow-md hover:shadow-lg transition-all group-hover:scale-105 -mt-20 pt-16 pb-8 px-6 md:h-48`}>
+        <div className={`${bgColor} rounded-md shadow-md hover:shadow-lg transition-all group-hover:scale-105 -mt-16 sm:-mt-20 pt-12 sm:pt-16 pb-6 sm:pb-8 px-4 sm:px-6 md:h-48`}>
           <h3 className="text-lg font-semibold text-slate-900">
             {full_name}
           </h3>

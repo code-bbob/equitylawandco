@@ -1,69 +1,55 @@
-'use client';
-
 import Link from 'next/link';
-import { useBlogs } from '../hooks/useBlogs';
+import { fetchBlogs } from '@/lib/api';
+import { baseUrl } from '@/lib/seo';
 import { Calendar, User, ChevronRight } from 'lucide-react';
 
-export default function BlogsPage() {
-  const { blogs, loading, error } = useBlogs();
+export const metadata = {
+  title: 'Legal Insights & News - Blog',
+  description: 'Stay informed with the latest legal insights, articles, and news from Equity Law & Co. Expert analysis on Intellectual Property, Corporate Law, Real Estate, and more.',
+  keywords: 'legal blog Nepal, law articles, legal insights, IP law blog, corporate law news, Equity Law blog',
+  openGraph: {
+    title: 'Legal Insights & News | Equity Law & Co.',
+    description: 'Stay informed with the latest legal insights, articles, and news from Equity Law & Co.',
+    url: `${baseUrl}/blogs`,
+    type: 'website',
+  },
+  alternates: {
+    canonical: `${baseUrl}/blogs`,
+  },
+};
 
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
-  };
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+}
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-amber-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-amber-900"></div>
-            <p className="mt-4 text-amber-800 text-lg">Loading blogs...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-amber-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-            <p className="text-red-700 text-lg">
-              Error loading blogs. Please try again later.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+export default async function BlogsPage() {
+  const blogs = await fetchBlogs();
 
   return (
     <div className="min-h-screen bg-amber-50">
       {/* Header Section */}
-      <section className="bg-[url('/images/banner4.jpg')] bg-cover bg-[50%_60%] text-white py-16">
+      <section className="bg-[url('/images/banner4.jpg')] bg-cover bg-[50%_60%] text-white py-10 sm:py-16">
         <div className=" mx-auto px-4 sm:px-6 lg:px-44">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Legal Insights & News</h1>
-          <p className="text-lg text-amber-100 max-w-2xl">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Legal Insights & News</h1>
+          <p className="text-base sm:text-lg text-amber-100 max-w-2xl">
             Stay informed with our latest articles on legal matters, industry insights, and updates that matter to you.
           </p>
         </div>
       </section>
 
       {/* Blogs List Section */}
-      <section className="py-16">
-        <div className="px-44 mx-auto ">
+      <section className="py-10 sm:py-16">
+        <div className="px-4 sm:px-6 lg:px-44 mx-auto ">
           {blogs.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-xl text-amber-800">No blogs available at this time.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               {blogs.map((blog) => (
-              <Link href={`/blogs/${blog.slug}`}>
+              <Link key={blog.id} href={`/blogs/${blog.slug}`}>
                 <article
-                  key={blog.id}
                   className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-amber-100"
                 >
                   {/* Featured Image */}

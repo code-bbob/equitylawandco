@@ -1,15 +1,30 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: 'About Us',
+  description: 'Equity Law & Co. is a full-service law firm in Nepal established in 2014, dedicated to delivering practical, reliable, and result-oriented legal solutions rooted in fairness and equity.',
+  keywords: 'about Equity Law, law firm Nepal, legal services Kathmandu, Nepal lawyers, Equity Law history',
+  openGraph: {
+    title: 'About Equity Law & Co.',
+    description: 'A full-service law firm in Nepal dedicated to delivering practical, reliable, and result-oriented legal solutions.',
+    url: 'https://equitylawandco.com/about',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://equitylawandco.com/about',
+  },
+};
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-amber-50 ">
       {/* Hero Section */}
-      <section className="bg-[url('/images/banner3.webp')] bg-cover bg-center text-white py-20">
+      <section className="bg-[url('/images/banner3.webp')] bg-cover bg-center text-white py-12 sm:py-20">
         <div className=" mx-auto px-4 sm:px-6 lg:px-44">
-          <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif mb-4 sm:mb-6">
             About Equity Law & Co.
           </h1>
-          <p className="text-xl text-amber-100 md:max-w-3xl">
+          <p className="text-base hidden md:block sm:text-xl text-amber-100 md:max-w-3xl">
             A full-service law firm in Nepal dedicated to delivering practical,
             reliable, and result-oriented legal solutions rooted in fairness and
             equity.
@@ -18,27 +33,27 @@ export default function AboutPage() {
       </section>
 
       {/* Company History */}
-      <section className="py-20 bg-amber-50">
-        <div className=" mx-auto px-4 sm:px-6 lg:px-64">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-12 sm:py-20 bg-amber-50">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-24 xl:px-64">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold font-serif text-amber-900 mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold font-serif text-amber-900 mb-6">
                 Our History
               </h2>
-              <p className="text-lg text-slate-700 mb-4 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 mb-4 leading-relaxed">
                 Equity Law & Co. was established in <strong>2014 A.D.</strong>{" "}
                 as "Equity Law Chamber," beginning as a specialized legal
                 practice committed to providing expert counsel across various
                 practice areas.
               </p>
-              <p className="text-lg text-slate-700 mb-4 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 mb-4 leading-relaxed">
                 In <strong>2025 A.D.</strong>, the firm underwent strategic
                 restructuring to become "Equity Law & Co.," reflecting its
                 institutional growth, expanded service offerings, and
                 institutional strength. This transformation marks our commitment
                 to serving clients with even greater expertise and resources.
               </p>
-              <p className="text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
                 Throughout our journey, we have maintained our founding
                 principle: law should not be merely applied but applied
                 equitably, taking into account the concept of fairness,
@@ -46,7 +61,7 @@ export default function AboutPage() {
                 justice.
               </p>
             </div>
-            <div className="bg-amber-50 p-8 rounded-lg border-2 border-amber-200">
+            <div className="bg-amber-50 p-6 sm:p-8 rounded-lg border-2 border-amber-200">
               <div className="space-y-6">
                 <div className="border-l-4 border-amber-700 pl-6">
                   <div className="text-3xl font-bold text-amber-900">2014</div>
@@ -73,10 +88,10 @@ export default function AboutPage() {
       </section>
 
       {/* Core Values & Pillars */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
-        <div className=" mx-auto px-4 sm:px-6 lg:px-64">
+      <section className="py-12 sm:py-20 bg-gradient-to-b from-slate-50 to-white">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-24 xl:px-64">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold font-serif text-amber-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold font-serif text-amber-900 mb-4">
               Our Core Pillars
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
@@ -85,7 +100,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
             {[
               {
                 title: "Equity",
@@ -110,7 +125,7 @@ export default function AboutPage() {
             ].map((pillar, idx) => (
               <div
                 key={idx}
-                className="bg-white p-8 rounded-lg border-2 border-amber-100 hover:border-amber-700 transition-all hover:shadow-lg"
+                className="bg-white p-6 sm:p-8 rounded-lg border-2 border-amber-100 hover:border-amber-700 transition-all hover:shadow-lg"
               >
                 <div className="text-4xl font-bold text-amber-700 mb-4">⚖</div>
                 <h3 className="text-xl font-bold text-amber-900 mb-3">
@@ -144,12 +159,12 @@ export default function AboutPage() {
           </div>
         </div>
       </section> */}
-      <section className="bg-[url('/images/banner1.jpg')] bg-cover bg-center text-white py-20 ">
+      <section className="bg-[url('/images/banner1.jpg')] bg-cover bg-center text-white py-12 sm:py-20 ">
         <div className=" mx-auto px-4 sm:px-6 lg:px-44">
-          <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif mb-4 sm:mb-6">
             Our Commitment
           </h1>
-          <p className="text-xl text-white font-semibold  max-w-3xl">
+          <p className="text-base sm:text-xl text-white font-semibold  max-w-3xl">
              Equity Law & Co. is committed to upholding the highest values of
             professional ethics and legal excellence. Through dedication,
             critical thinking, and a strong sense of responsibility, we aim to
@@ -173,10 +188,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-100">
-        <div className="mx-auto px-4 sm:px-6 lg:px-64">
+      <section className="py-12 sm:py-20 bg-gray-100">
+        <div className="mx-auto px-4 sm:px-6 lg:px-24 xl:px-64">
           {/* Mission & Vision */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
             <div className="bg-amber-50 p-10 rounded-lg">
               <h3 className="text-2xl font-bold text-amber-900 mb-4">
                 Our Mission
@@ -204,8 +219,8 @@ export default function AboutPage() {
             </div>
 
             {/* Motto */}
-            <div className="bg-gray-500 text-white p-10 rounded-lg">
-              <h3 className="text-2xl font-bold text-amber-100 mb-4">
+            <div className="bg-gray-500 text-white p-6 sm:p-10 rounded-lg">
+              <h3 className="text-xl sm:text-2xl font-bold text-amber-100 mb-4">
                 Our Motto
               </h3>
               <p className="text-amber-50 leading-relaxed">
@@ -217,9 +232,9 @@ export default function AboutPage() {
       </section>
 
       {/* Practice Areas of Expertise */}
-      <section className="py-20 bg-amber-50 ">
-        <div className=" mx-auto px-4 sm:px-6 lg:px-64">
-          <h2 className="text-4xl font-bold font-serif text-amber-900 mb-4 text-center">
+      <section className="py-12 sm:py-20 bg-amber-50 ">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-24 xl:px-64">
+          <h2 className="text-3xl sm:text-4xl font-bold font-serif text-amber-900 mb-4 text-center">
             Areas of Expertise
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto text-center mb-12">

@@ -1,68 +1,73 @@
-'use client';
-
-import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { fetchPracticeAreas, fetchPracticeArea } from '@/lib/api';
+import { generatePracticeAreaSchema, generateBreadcrumbSchema, baseUrl } from '@/lib/seo';
+import { notFound } from 'next/navigation';
 
-export default function PracticeAreaDetail({ params }) {
-  const { slug } = use(params);
-  const [area, setArea] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+// Generate static pages for all practice areas at build time
+export async function generateStaticParams() {
+  const areas = await fetchPracticeAreas();
+  return areas.map((area) => ({
+    slug: area.slug,
+  }));
+}
 
-  useEffect(() => {
-    const fetchPracticeArea = async () => {
-      try {
-        const response = await fetch(`${API_BASE}/practice-areas/${slug}/`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch practice area');
-        }
-        const data = await response.json();
-        console.log('Practice area data:', data);
-        setArea(data);
-      } catch (err) {
-        setError(err.message);
-        console.error('Error fetching practice area:', err);
-      } finally {
-        setLoading(false);
-      }
+// Dynamic metadata for each practice area
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const area = await fetchPracticeArea(slug);
+  
+  if (!area) {
+    return {
+      title: 'Practice Area Not Found',
     };
-
-    fetchPracticeArea();
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-600">Loading...</p>
-      </div>
-    );
   }
 
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-xl text-red-600 mb-4">Error loading practice area</p>
-          <Link href="/" className="text-amber-600 hover:text-amber-800 font-semibold">
-            ← Back to Home
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const plainDescription = area.description?.replace(/<[^>]*>/g, '').substring(0, 160) || '';
+
+  return {
+    title: `${area.name} - Legal Services`,
+    description: plainDescription || `Expert ${area.name} legal services at Equity Law & Co. Get professional consultation and representation in Nepal.`,
+    keywords: `${area.name}, legal services Nepal, ${area.name} lawyer, ${area.name} attorney, Equity Law`,
+    openGraph: {
+      title: `${area.name} | Equity Law & Co.`,
+      description: plainDescription || `Expert ${area.name} legal services.`,
+      url: `${baseUrl}/practice-areas/${area.slug}`,
+      type: 'website',
+      images: area.featured_image_url ? [{ url: area.featured_image_url, alt: area.name }] : [],
+    },
+    alternates: {
+      canonical: `${baseUrl}/practice-areas/${area.slug}`,
+    },
+  };
+}
+
+export default async function PracticeAreaDetail({ params }) {
+  const { slug } = await params;
+  const area = await fetchPracticeArea(slug);
 
   if (!area) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-600">Practice area not found</p>
-      </div>
-    );
+    notFound();
   }
+
+  const practiceAreaSchema = generatePracticeAreaSchema(area);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Practice Areas', url: '/practice-areas' },
+    { name: area.name, url: `/practice-areas/${area.slug}` },
+  ]);
 
   return (
     <div className="min-h-screen bg-amber-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(practiceAreaSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       <style>{`
         figure {
           margin: 1rem 0;
@@ -125,19 +130,19 @@ export default function PracticeAreaDetail({ params }) {
       `}</style>
 
       {/* Hero Section with Featured Image */}
-        <div className="relative h-32 py-16 md:h-64 bg-[url('/images/banner2.jpg')] bg-cover bg-center overflow-hidden">
+        <div className="relative h-32 py-8 sm:py-16 md:h-64 bg-[url('/images/banner2.jpg')] bg-cover bg-center overflow-hidden">
  
             <div className="mx-auto px-4 sm:px-6 lg:px-44 w-full">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-4">Practice Areas</h1>
-              <p className="text-lg md:text-xl  text-amber-100">Areas of Services</p>
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-4">Practice Areas</h1>
+              <p className="text-sm sm:text-lg md:text-xl  text-amber-100">Areas of Services</p>
             </div>
           </div>
 
 
       {/* Main Content */}
-      <article className={`mx-auto px-4 sm:px-6 lg:px-44 ${area.featured_image_url ? 'py-12' : 'py-16'}`}>
-          <header className="mb-12">
-            <h1 className="text-5xl font-bold text-amber-900 mb-4">{area.name}</h1>
+      <article className={`mx-auto px-4 sm:px-6 lg:px-44 ${area.featured_image_url ? 'py-8 sm:py-12' : 'py-10 sm:py-16'}`}>
+          <header className="mb-8 sm:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-4">{area.name}</h1>
             <div className="flex items-center space-x-4 text-amber-800">
               <span className="bg-amber-200 text-amber-900 px-3 py-1 rounded-full text-sm font-semibold">
                 Practice Area
@@ -153,9 +158,7 @@ export default function PracticeAreaDetail({ params }) {
               <div
                 className="text-amber-900 leading-relaxed text-sm md:text-lg break-words overflow-x-hidden"
                 dangerouslySetInnerHTML={{
-                  __html: area.description
-                    .replace(/src="\/media\//g, `src="${process.env.NEXT_PUBLIC_API_BASE}/media/`)
-                    .replace(/src=['"](?!http)/g, `src="${process.env.NEXT_PUBLIC_API_BASE}`),
+                  __html: area.description,
                 }}
               />
             </div>
@@ -169,12 +172,11 @@ export default function PracticeAreaDetail({ params }) {
                   <h3 className="text-lg font-bold text-amber-900 mb-4">Key Information</h3>
                   <div className="relative w-full h-64 mb-4">
                     <Image
-                      src={area.featured_image_url.startsWith('http') ? area.featured_image_url : `${process.env.NEXT_PUBLIC_API_BASE}${area.featured_image_url}`}
+                      src={area.featured_image_url}
                       alt={area.name}
                       fill
                       className="object-cover rounded-lg shadow-md"
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      onError={(e) => console.error(`Failed to load side image: ${area.featured_image_url}`, e)}
                     />
                   </div>
                   <ul className="space-y-3 text-sm text-amber-900">
@@ -202,18 +204,18 @@ export default function PracticeAreaDetail({ params }) {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-[url('/images/banner1.jpg')] bg-cover bg-center rounded-xl p-8 md:p-12 mb-16 text-white">
+        <div className="bg-[url('/images/banner1.jpg')] bg-cover bg-center rounded-xl p-6 sm:p-8 md:p-12 mb-12 sm:mb-16 text-white">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Discuss Your Case?</h2>
-              <p className="text-lg text-amber-50 mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Ready to Discuss Your Case?</h2>
+              <p className="text-base sm:text-lg text-amber-50 mb-6">
                 Our experienced team specializes in {area.name.toLowerCase()} and is ready to help you achieve the best possible outcome.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-amber-50 text-amber-900 hover:bg-white px-8 py-3 rounded-lg font-bold transition-colors">
+                <button className="bg-amber-50 text-amber-900 hover:bg-white px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base">
                   Schedule Consultation
                 </button>
-                <button className="border-2 border-amber-100 text-amber-50 hover:bg-amber-700 px-8 py-3 rounded-lg font-bold transition-colors">
+                <button className="border-2 border-amber-100 text-amber-50 hover:bg-amber-700 px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base">
                   Call Us Now
                 </button>
               </div>
@@ -222,23 +224,23 @@ export default function PracticeAreaDetail({ params }) {
         </div>
 
         {/* Why Choose Us Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-amber-900 mb-8">Why Choose Our {area.name} Team?</h2>
+        <div className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-amber-900 mb-6 sm:mb-8">Why Choose Our {area.name} Team?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-amber-100 p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
-              <h3 className="text-xl font-bold text-amber-900 mb-3">✓ Expertise</h3>
+            <div className="bg-amber-100 p-4 sm:p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
+              <h3 className="text-lg sm:text-xl font-bold text-amber-900 mb-3">✓ Expertise</h3>
               <p className="text-amber-800">Deep knowledge and extensive experience in {area.name}</p>
             </div>
-            <div className="bg-amber-100 p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
-              <h3 className="text-xl font-bold text-amber-900 mb-3">✓ Dedication</h3>
+            <div className="bg-amber-100 p-4 sm:p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
+              <h3 className="text-lg sm:text-xl font-bold text-amber-900 mb-3">✓ Dedication</h3>
               <p className="text-amber-800">Committed to achieving the best results for our clients</p>
             </div>
-            <div className="bg-amber-100 p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
-              <h3 className="text-xl font-bold text-amber-900 mb-3">✓ Innovation</h3>
+            <div className="bg-amber-100 p-4 sm:p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
+              <h3 className="text-lg sm:text-xl font-bold text-amber-900 mb-3">✓ Innovation</h3>
               <p className="text-amber-800">Using cutting-edge strategies and legal approaches</p>
             </div>
-            <div className="bg-amber-100 p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
-              <h3 className="text-xl font-bold text-amber-900 mb-3">✓ Results</h3>
+            <div className="bg-amber-100 p-4 sm:p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
+              <h3 className="text-lg sm:text-xl font-bold text-amber-900 mb-3">✓ Results</h3>
               <p className="text-amber-800">Track record of successful cases and satisfied clients</p>
             </div>
           </div>
@@ -246,27 +248,19 @@ export default function PracticeAreaDetail({ params }) {
 
         {/* Image Gallery Section */}
         {area.gallery_images && area.gallery_images.length > 0 && (
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-amber-900 mb-8">Our Work & Resources</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-amber-900 mb-6 sm:mb-8">Our Work & Resources</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {area.gallery_images.map((image, idx) => {
-                // Ensure image URL is absolute
-                let imageUrl = image.image_url;
-                if (imageUrl && !imageUrl.startsWith('http')) {
-                  const apiBase = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8000';
-                  imageUrl = `${apiBase}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
-                }
-                
                 return (
                   <div key={image.id || idx} className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow">
                     <div className="relative w-full h-64">
                       <Image
-                        src={imageUrl}
+                        src={image.image_url}
                         alt={image.title || `Gallery image ${idx + 1}`}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        onError={(e) => console.error(`Failed to load image: ${imageUrl}`, e)}
                       />
                     </div>
                     {image.title && (
@@ -287,9 +281,9 @@ export default function PracticeAreaDetail({ params }) {
         )}
 
         {/* Process Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-amber-900 mb-8">Our Process</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-amber-900 mb-6 sm:mb-8">Our Process</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {['Consultation', 'Analysis', 'Strategy', 'Resolution'].map((step, idx) => (
               <div key={idx} className="relative">
                 <div className="bg-amber-800 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mb-4">

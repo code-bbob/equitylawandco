@@ -1,84 +1,92 @@
-'use client';
-
 import Link from 'next/link';
-import { useBlog } from '../../hooks/useBlog';
+import { fetchBlogs, fetchBlog } from '@/lib/api';
+import { generateBlogSchema, generateBreadcrumbSchema, baseUrl } from '@/lib/seo';
 import { Calendar, User, ChevronRight } from 'lucide-react';
-import { useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
-export default function BlogDetailPage() {
-  const params = useParams();
-  const slug = params?.slug;
-  const { blog, loading, error } = useBlog(slug);
+// Generate static pages for all blogs at build time
+export async function generateStaticParams() {
+  const blogs = await fetchBlogs();
+  return blogs.map((blog) => ({
+    slug: blog.slug,
+  }));
+}
 
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+// Dynamic metadata for each blog post
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const blog = await fetchBlog(slug);
+  
+  if (!blog) {
+    return {
+      title: 'Blog Not Found',
+    };
+  }
+
+  return {
+    title: blog.title,
+    description: blog.excerpt || `Read ${blog.title} by ${blog.author} on Equity Law & Co.'s legal insights blog.`,
+    keywords: `${blog.title}, ${blog.category || ''}, legal blog, law article, ${blog.author}`,
+    openGraph: {
+      title: `${blog.title} | Equity Law & Co.`,
+      description: blog.excerpt || blog.title,
+      url: `${baseUrl}/blogs/${blog.slug}`,
+      type: 'article',
+      publishedTime: blog.published_date,
+      modifiedTime: blog.updated_date,
+      authors: [blog.author],
+      images: blog.featured_image ? [{ url: blog.featured_image, alt: blog.title }] : [],
+    },
+    alternates: {
+      canonical: `${baseUrl}/blogs/${blog.slug}`,
+    },
   };
+}
 
-  if (!slug) {
-    return (
-      <div className="min-h-screen bg-amber-50 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-amber-800 text-lg">Loading...</p>
-        </div>
-      </div>
-    );
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+export default async function BlogDetailPage({ params }) {
+  const { slug } = await params;
+  const blog = await fetchBlog(slug);
+
+  if (!blog) {
+    notFound();
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-amber-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-amber-900"></div>
-            <p className="mt-4 text-amber-800 text-lg">Loading blog...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !blog) {
-    return (
-      <div className="min-h-screen bg-amber-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center space-x-2 text-md text-amber-700 mb-8">
-            <Link href="/" className="hover:text-amber-900 transition-colors">
-              Home
-            </Link>
-            <ChevronRight size={16} />
-            <Link href="/blogs" className="hover:text-amber-900 transition-colors">
-              Blogs
-            </Link>
-            <ChevronRight size={16} />
-            <span className="text-amber-900 font-semibold">Article:{blog.title}</span>
-          </div>
-
-          <div className="bg-red-50 border border-red-200 rounded-lg p-8 text-center">
-            <p className="text-red-700 text-lg">
-              Sorry, the blog you are looking for could not be found.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const blogSchema = generateBlogSchema(blog);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Blogs', url: '/blogs' },
+    { name: blog.title, url: `/blogs/${blog.slug}` },
+  ]);
 
   return (
     <div className="min-h-screen bg-amber-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Breadcrumbs */}
       <div className="py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center space-x-2 text-md text-amber-700">
-            <Link href="/" className="hover:text-amber-900 transition-colors">
+          <nav className="flex items-center space-x-2 text-sm sm:text-md text-amber-700 overflow-hidden">
+            <Link href="/" className="hover:text-amber-900 transition-colors flex-shrink-0">
               Home
             </Link>
-            <ChevronRight size={16} />
-            <Link href="/blogs" className="hover:text-amber-900 transition-colors">
+            <ChevronRight size={16} className="flex-shrink-0" />
+            <Link href="/blogs" className="hover:text-amber-900 transition-colors flex-shrink-0">
               Blogs
             </Link>
-            <ChevronRight size={16} />
-            <span className="text-amber-900 font-semibold">Article: {blog.title}</span>
+            <ChevronRight size={16} className="flex-shrink-0" />
+            <span className="text-amber-900 font-semibold truncate">Article: {blog.title}</span>
           </nav>
         </div>
       </div>
@@ -92,7 +100,7 @@ export default function BlogDetailPage() {
               <img
                 src={blog.featured_image}
                 alt={blog.title}
-                className="w-full h-96 object-cover"
+                className="w-full h-48 sm:h-72 md:h-96 object-cover"
               />
             </div>
           )}
@@ -117,7 +125,7 @@ export default function BlogDetailPage() {
               </div>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-amber-900 mb-4 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 mb-4 leading-tight">
               {blog.title}
             </h1>
 
@@ -127,7 +135,7 @@ export default function BlogDetailPage() {
           </div>
 
           {/* Article Content */}
-          <div className="bg-white rounded-lg shadow-lg p-8 md:p-12 prose prose-amber max-w-none">
+          <div className="bg-white rounded-lg shadow-lg p-5 sm:p-8 md:p-12 prose prose-amber max-w-none">
             <div
               className="text-amber-900 leading-relaxed space-y-6"
               dangerouslySetInnerHTML={{
@@ -137,7 +145,7 @@ export default function BlogDetailPage() {
           </div>
 
           {/* Author Info Card */}
-          <div className="mt-12 bg-orange-100 rounded-lg p-8 border border-amber-200 shadow-md">
+          <div className="mt-8 sm:mt-12 bg-orange-100 rounded-lg p-5 sm:p-8 border border-amber-200 shadow-md">
             <h3 className="text-lg font-bold text-amber-900 mb-3">About the Author</h3>
             <p className="text-amber-800 leading-relaxed">
               <span className='font-bold'>{blog.author}</span> is a legal professional with expertise in various areas of law. This article reflects their professional insights and analysis.
@@ -145,9 +153,9 @@ export default function BlogDetailPage() {
           </div>
 
           {/* Related Articles Section */}
-          <div className="mt-16 pt-12 border-t-2 border-amber-200">
+          <div className="mt-10 sm:mt-16 pt-8 sm:pt-12 border-t-2 border-amber-200">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-amber-900">Explore More Articles</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-amber-900">Explore More Articles</h2>
               <p className="text-amber-800 mt-2">Discover more legal insights and news</p>
             </div>
 
