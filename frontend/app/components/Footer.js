@@ -9,6 +9,7 @@ export default function Footer() {
           <div className="border-l-2 border-amber-700 pl-6">
             <h3 className="text-amber-900 font-bold text-xl mb-3">Equity Law & Co</h3>
             <p className="text-amber-800 text-sm leading-relaxed">Leading the legal industry with integrity, expertise, and excellence for over 20 years.</p>
+          <p className="text-amber-800 text-sm underline font-medium italic leading-relaxed mt-2">Office Opening Hours: <br/> Sun - Fri, 9:30 AM - 6:00 PM</p>
           </div>
 
           {/* Quick Links */}

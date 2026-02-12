@@ -128,7 +128,7 @@ export default function Navbar({ practiceAreas = [] }) {
 
             {/* CTA Button */}
             <Link href="/appointments" className="ml-6 pl-6 border-l border-slate-200">
-              <button className="relative group px-6 py-4 bg-blue-500 rounded-md font-semibold text-xs tracking-[0.18em] uppercase text-white transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md bg-slate-900 hover:bg-slate-800">
+              <button className="relative group px-6 py-4 bg-blue-500 rounded-md font-semibold text-xs tracking-[0.18em] uppercase text-white transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md bg-slate-900 hover:scale-105 hover:bg-slate-800">
                 <span className="relative z-10">Book Appointments</span>
               </button>
             </Link>

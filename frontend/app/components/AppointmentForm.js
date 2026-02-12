@@ -210,9 +210,9 @@ export default function AppointmentForm() {
   };
 
   return (
-    <main className="bg-white">
+    <main className="bg-amber-50">
       {/* Hero Section - Compact */}
-      <section className="bg-gradient-to-br from-slate-50 via-white to-amber-50 relative overflow-hidden py-12 md:py-16">
+      <section className="bg-amber-50 relative overflow-hidden py-12 md:py-16">
         <div className="absolute top-0 right-0 w-96 h-96 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 -mr-48 -mt-48"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -227,8 +227,8 @@ export default function AppointmentForm() {
       </section>
 
       {/* Form Section - Compact */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pb-12 mx-auto">
+        <div className="max-w-4xl mx-auto bg-white py-12 px-4 sm:px-6 lg:px-8">
           {/* Alert Messages */}
           {error && (
             <div className="mb-8 p-6 rounded-lg bg-red-50 border-l-4 border-red-500 text-red-800 animate-in fade-in slide-in-from-top">
@@ -293,7 +293,7 @@ export default function AppointmentForm() {
                   name="client_phone"
                   value={formData.client_phone}
                   onChange={handleInputChange}
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+977 123-4567"
                   required
                   className="px-4 py-3 border border-slate-200 rounded-lg text-slate-900 font-inherit transition-all bg-slate-50 focus:outline-none focus:border-amber-600 focus:bg-white focus:ring-2 focus:ring-amber-600/30 placeholder:text-slate-400"
                 />
@@ -461,6 +461,22 @@ export default function AppointmentForm() {
               </p>
             </div>
           </form>
+          {error && (
+            <div className="mb-8 p-6 rounded-lg bg-red-50 border-l-4 border-red-500 text-red-800 animate-in fade-in slide-in-from-top">
+              <div className="flex">
+                <div className="flex-shrink-0 text-red-700 text-xl">⚠️</div>
+                <div className="ml-4 text-sm font-medium">{error}</div>
+              </div>
+            </div>
+          )}
+          {success && (
+            <div className="mb-8 p-6 rounded-lg bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 animate-in fade-in slide-in-from-top">
+              <div className="flex">
+                <div className="flex-shrink-0 text-emerald-700 text-xl">✓</div>
+                <div className="ml-4 text-sm font-medium">{success}</div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

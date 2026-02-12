@@ -6,7 +6,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 export async function fetchAttorneys() {
   try {
     const res = await fetch(`${BASE_URL}/attorneys/`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
@@ -27,7 +27,7 @@ export async function fetchAttorneys() {
 export async function fetchAttorney(slug) {
   try {
     const res = await fetch(`${BASE_URL}/attorneys/${slug}/`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
@@ -45,7 +45,7 @@ export async function fetchAttorney(slug) {
 export async function fetchBlogs() {
   try {
     const res = await fetch(`${BASE_URL}/blogs/`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
@@ -68,7 +68,7 @@ export async function fetchBlog(slug) {
     console.log("API BASE_URL:", BASE_URL);
 
     const res = await fetch(`${BASE_URL}/blogs/${slug}/`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
@@ -86,7 +86,7 @@ export async function fetchBlog(slug) {
 export async function fetchPracticeAreas() {
   try {
     const res = await fetch(`${BASE_URL}/practice-areas/`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
@@ -107,7 +107,7 @@ export async function fetchPracticeAreas() {
 export async function fetchPracticeArea(slug) {
   try {
     const res = await fetch(`${BASE_URL}/practice-areas/${slug}/`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {

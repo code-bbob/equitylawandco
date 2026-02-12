@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import PracticeArea, PracticeAreaImage, ContactMessage, Appointment, AppointmentDay, AvailableHours, Attorney, Blog
 
+
+admin.site.site_header = "Equity Law & Co Admin"
+admin.site.site_title = "Equity Law & Co Admin Portal"
+admin.site.index_title = "Welcome to Equity Law & Co Administration"
+
+
 class PracticeAreaImageInline(admin.TabularInline):
     model = PracticeAreaImage
     extra = 3

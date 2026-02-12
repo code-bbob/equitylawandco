@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'pages',
     'blogs',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -108,6 +109,45 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+
+
+# Tell django-storages to use the S3Boto3 backend:
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": 'DO801PV3PZ7ZJQ8JKZZJ',
+            "secret_key": 'giHf/7mqvABSQhF1mXg0b9RVcNLDBCLgN0DNR91hNZM',
+            "bucket_name": 'digitech-ecommerce',
+            "endpoint_url": "https://blr1.digitaloceanspaces.com",
+            "location":'equitylawandco',
+            "default_acl": "public-read",
+            "custom_domain": 'digitech-ecommerce.blr1.digitaloceanspaces.com',
+        }
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": 'DO801PV3PZ7ZJQ8JKZZJ',
+            "secret_key": 'giHf/7mqvABSQhF1mXg0b9RVcNLDBCLgN0DNR91hNZM',
+            "bucket_name": 'digitech-ecommerce',
+            "endpoint_url": "https://blr1.digitaloceanspaces.com",
+            "location":'static',
+            "default_acl": "public-read",
+            "custom_domain": 'digitech-ecommerce.blr1.digitaloceanspaces.com',
+        }
+    },
+}
+#okay
+
+# You can also configure additional options if needed:
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+
 
 
 # Internationalization

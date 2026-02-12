@@ -329,6 +329,10 @@ def send_appointment_confirmation_email(appointment):
                                     <span class="detail-label">⏱️ Duration: </span>
                                     <span class="detail-value">{appointment.duration_minutes} minutes</span>
                                 </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">📝 Notes: </span>
+                                    <span class="detail-value">{appointment.notes if appointment.notes else 'N/A'}</span>
+                                </div>
                             </div>
                             
                             <div class="footer">
