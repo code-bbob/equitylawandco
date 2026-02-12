@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { fetchPracticeAreas, fetchPracticeArea } from '@/lib/api';
 import { generatePracticeAreaSchema, generateBreadcrumbSchema, baseUrl } from '@/lib/seo';
 import { notFound } from 'next/navigation';
+import FadeIn from '../../components/FadeIn';
+import ScrollFadeIn from '../../components/ScrollFadeIn';
 
 // Generate static pages for all practice areas at build time
 export async function generateStaticParams() {
@@ -133,25 +135,32 @@ export default async function PracticeAreaDetail({ params }) {
         <div className="relative h-32 py-8 sm:py-16 md:h-64 bg-[url('/images/banner2.jpg')] bg-cover bg-center overflow-hidden">
  
             <div className="mx-auto px-4 sm:px-6 lg:px-44 w-full">
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-4">Practice Areas</h1>
-              <p className="text-sm sm:text-lg md:text-xl  text-amber-100">Areas of Services</p>
+              <FadeIn delay={100} duration={700} slideDistance={30}>
+                <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-4">Practice Areas</h1>
+              </FadeIn>
+              <FadeIn delay={250} duration={700}>
+                <p className="text-sm sm:text-lg md:text-xl  text-amber-100">Areas of Services</p>
+              </FadeIn>
             </div>
           </div>
 
 
       {/* Main Content */}
       <article className={`mx-auto px-4 sm:px-6 lg:px-44 ${area.featured_image_url ? 'py-8 sm:py-12' : 'py-10 sm:py-16'}`}>
-          <header className="mb-8 sm:mb-12">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-4">{area.name}</h1>
-            <div className="flex items-center space-x-4 text-amber-800">
-              <span className="bg-amber-200 text-amber-900 px-3 py-1 rounded-full text-sm font-semibold">
-                Practice Area
-              </span>
-            </div>
+          <ScrollFadeIn>
+            <header className="mb-8 sm:mb-12">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-4">{area.name}</h1>
+              <div className="flex items-center space-x-4 text-amber-800">
+                <span className="bg-amber-200 text-amber-900 px-3 py-1 rounded-full text-sm font-semibold">
+                  Practice Area
+                </span>
+              </div>
           </header>
+          </ScrollFadeIn>
 
         {/* Two Column Layout: Description + Images */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16 overflow-hidden">
+        <ScrollFadeIn duration={800}>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16 overflow-hidden">
           {/* Main Description - 2 columns */}
           <div className="lg:col-span-2 overflow-hidden">
             <div className="prose prose-sm md:prose-lg max-w-none prose-img:rounded-lg prose-img:shadow-md overflow-hidden">
@@ -202,9 +211,11 @@ export default async function PracticeAreaDetail({ params }) {
             </div>
           )}
         </div>
+        </ScrollFadeIn>
 
         {/* CTA Section */}
-        <div className="bg-[url('/images/banner1.jpg')] bg-cover bg-center rounded-xl p-6 sm:p-8 md:p-12 mb-12 sm:mb-16 text-white">
+        <ScrollFadeIn duration={800}>
+          <div className="bg-[url('/images/banner1.jpg')] bg-cover bg-center rounded-xl p-6 sm:p-8 md:p-12 mb-12 sm:mb-16 text-white">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Ready to Discuss Your Case?</h2>
@@ -221,10 +232,12 @@ export default async function PracticeAreaDetail({ params }) {
               </div>
             </div>
           </div>
-        </div>
+          </div>
+        </ScrollFadeIn>
 
         {/* Why Choose Us Section */}
-        <div className="mb-12 sm:mb-16">
+        <ScrollFadeIn duration={800}>
+          <div className="mb-12 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-amber-900 mb-6 sm:mb-8">Why Choose Our {area.name} Team?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-amber-100 p-4 sm:p-6 rounded-lg border border-amber-300 hover:border-amber-700 hover:shadow-lg transition-all">
@@ -244,11 +257,13 @@ export default async function PracticeAreaDetail({ params }) {
               <p className="text-amber-800">Track record of successful cases and satisfied clients</p>
             </div>
           </div>
-        </div>
+          </div>
+        </ScrollFadeIn>
 
         {/* Image Gallery Section */}
         {area.gallery_images && area.gallery_images.length > 0 && (
-          <div className="mb-12 sm:mb-16">
+          <ScrollFadeIn duration={800}>
+            <div className="mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl font-bold text-amber-900 mb-6 sm:mb-8">Our Work & Resources</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {area.gallery_images.map((image, idx) => {
@@ -277,11 +292,13 @@ export default async function PracticeAreaDetail({ params }) {
                 );
               })}
             </div>
-          </div>
+            </div>
+          </ScrollFadeIn>
         )}
 
         {/* Process Section */}
-        <div className="mb-12 sm:mb-16">
+        <ScrollFadeIn duration={800}>
+          <div className="mb-12 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-amber-900 mb-6 sm:mb-8">Our Process</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {['Consultation', 'Analysis', 'Strategy', 'Resolution'].map((step, idx) => (
@@ -297,7 +314,8 @@ export default async function PracticeAreaDetail({ params }) {
               </div>
             ))}
           </div>
-        </div>
+          </div>
+        </ScrollFadeIn>
       </article>
 
       {/* Contact Section */}

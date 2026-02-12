@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { fetchBlogs } from '@/lib/api';
 import { baseUrl } from '@/lib/seo';
 import { Calendar, User, ChevronRight } from 'lucide-react';
+import FadeIn from '../components/FadeIn';
+import ScrollFadeIn from '../components/ScrollFadeIn';
 
 export const metadata = {
   title: 'Legal Insights & News - Blog',
@@ -31,10 +33,14 @@ export default async function BlogsPage() {
       {/* Header Section */}
       <section className="bg-[url('/images/banner4.jpg')] bg-cover bg-[50%_60%] text-white py-10 sm:py-16">
         <div className=" mx-auto px-4 sm:px-6 lg:px-44">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Legal Insights & News</h1>
-          <p className="text-base sm:text-lg text-amber-100 max-w-2xl">
-            Stay informed with our latest articles on legal matters, industry insights, and updates that matter to you.
-          </p>
+          <FadeIn delay={100} duration={700} slideDistance={30}>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Legal Insights & News</h1>
+          </FadeIn>
+          <FadeIn delay={250} duration={700}>
+            <p className="text-base sm:text-lg text-amber-100 max-w-2xl">
+              Stay informed with our latest articles on legal matters, industry insights, and updates that matter to you.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
@@ -47,18 +53,19 @@ export default async function BlogsPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-              {blogs.map((blog) => (
+              {blogs.map((blog, index) => (
               <Link key={blog.id} href={`/blogs/${blog.slug}`}>
-                <article
-                  className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-amber-100"
-                >
+                <ScrollFadeIn duration={900} threshold={0.1} slideDistance={70}>
+                  <article
+                    className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-amber-100 hover-lift will-animate hover-slide"
+                  >
                   {/* Featured Image */}
                   {blog.featured_image && (
                     <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200">
                       <img
                         src={blog.featured_image}
                         alt={blog.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
                       />
                       {blog.category && (
                         <div className="absolute top-4 right-4 bg-amber-600 text-white px-2 py-1 rounded-full text-xs font-semibold opacity-0">
@@ -69,8 +76,8 @@ export default async function BlogsPage() {
                   )}
 
                   {/* Content */}
-                  <div className="p-6">
-                    <div className="text-sm font-bold text-amber-900 mb-3 line-clamp-2 hover:text-amber-700">
+                  <div className="p-6 relative">
+                    <div className="text-sm font-bold text-amber-900 mb-3 line-clamp-2 hover:text-amber-700 transition-colors duration-300">
                       {blog.title}
                     </div>
 
@@ -91,12 +98,13 @@ export default async function BlogsPage() {
                     </div>
 
                     {/* Read More Link */}
-                      <button className="inline-flex items-center text-amber-700 hover:text-amber-900 font-semibold group">
+                      <button className="inline-flex items-center text-amber-700 hover:text-amber-900 font-semibold group transition-all duration-300">
                         Read More
-                        <ChevronRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                        <ChevronRight size={18} className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                       </button>
                   </div>
-                </article>
+                  </article>
+                </ScrollFadeIn>
                     </Link>
               ))}
             </div>

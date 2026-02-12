@@ -1,6 +1,7 @@
 import { fetchAttorneys } from '@/lib/api';
 import { baseUrl } from '@/lib/seo';
 import AttorneyFilterPage from '../components/AttorneyFilterPage';
+import FadeIn from '../components/FadeIn';
 
 export const metadata = {
   title: 'Our Attorneys - Meet Our Legal Team',
@@ -39,18 +40,20 @@ export default async function AttorneysPage() {
         <div className="absolute top-1/2 right-1/3 w-80 h-80 bg-amber-50 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl">
-            <span className="inline-block text-xs font-semibold text-amber-700 tracking-[0.2em] uppercase border border-amber-200 px-4 py-2 rounded mb-6">
-              Our Team
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-4 mb-6">
-              Meet the Minds Behind<br />
-              <span className="text-amber-700">Our Success</span>
-            </h1>
-            <p className="text-lg text-slate-700 leading-relaxed">
-              A collective of seasoned legal professionals dedicated to upholding the principles of fairness, diligence, and equity. Each attorney brings a unique perspective and deep specialization to the firm.
-            </p>
-          </div>
+          <FadeIn delay={100} duration={700}>
+            <div className="max-w-3xl">
+              <span className="inline-block text-xs font-semibold text-amber-700 tracking-[0.2em] uppercase border border-amber-200 px-4 py-2 rounded mb-6">
+                Our Team
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-4 mb-6">
+                Meet the Minds Behind<br />
+                <span className="text-amber-700">Our Success</span>
+              </h1>
+              <p className="text-lg text-slate-700 leading-relaxed">
+                A collective of seasoned legal professionals dedicated to upholding the principles of fairness, diligence, and equity. Each attorney brings a unique perspective and deep specialization to the firm.
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

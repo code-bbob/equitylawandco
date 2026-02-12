@@ -23,7 +23,7 @@ export default function AttorneyCard({ attorney, priority = false }) {
 
   return (
     <Link href={`/attorneys/${slug}`}>
-      <div className="group cursor-pointer py-10 text-center">
+      <div className="group cursor-pointer py-10 text-center hover-lift will-animate">
         {/* Circular Photo */}
         <div className="mb-6 flex justify-center relative z-10">
           <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:shadow-xl transition-shadow">
@@ -46,11 +46,11 @@ export default function AttorneyCard({ attorney, priority = false }) {
         </div>
         
         {/* Colored Card Background */}
-        <div className={`${bgColor} rounded-md shadow-md hover:shadow-lg transition-all group-hover:scale-105 -mt-16 sm:-mt-20 pt-12 sm:pt-16 pb-6 sm:pb-8 px-4 sm:px-6 md:h-48`}>
-          <h3 className="text-lg font-semibold text-slate-900">
+        <div className={`${bgColor} rounded-md shadow-md hover:shadow-2xl transition-all duration-500 group-hover:scale-105 -mt-16 sm:-mt-20 pt-12 sm:pt-16 pb-6 sm:pb-8 px-4 sm:px-6 md:h-48 relative overflow-hidden hover-slide`}>
+          <h3 className="text-lg font-semibold text-slate-900 group-hover:scale-105 transition-transform duration-300">
             {full_name}
           </h3>
-          <p className="text-sm text-slate-700 mt-1">
+          <p className="text-sm text-slate-700 mt-1 group-hover:text-slate-900 transition-colors">
             {job_title}
           </p>
         </div>

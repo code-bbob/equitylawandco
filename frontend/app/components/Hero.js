@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import FadeIn from "./FadeIn";
 
 export default function Hero() {
   const [imagesLoaded, setImagesLoaded] = useState(0);
@@ -60,36 +61,44 @@ export default function Hero() {
       >
         <div className="max-w-4xl mx-auto">
           {/* Refined Badge */}
-          <div className="mb-[2vh] md:mb-[2vh] inline-block">
-            <span className="text-[clamp(0.625rem,1.2vw,0.75rem)]  font-semibold text-amber-400 tracking-[0.15em] uppercase bg-black/30 py-[0.5em] px-[1em] rounded-lg backdrop-blur-md border border-amber-500/30 transition-all duration-300">
-              Excellence in Legal Services
-            </span>
-          </div>
+          <FadeIn delay={150} duration={800} slideDistance={40} scaleFrom={0.85}>
+            <div className="mb-[2vh] md:mb-[2vh] inline-block hover-glow">
+              <span className="text-[clamp(0.625rem,1.2vw,0.75rem)]  font-semibold text-amber-400 tracking-[0.15em] uppercase bg-black/30 py-[0.5em] px-[1em] rounded-lg backdrop-blur-md border border-amber-500/30 transition-all duration-300">
+                Excellence in Legal Services
+              </span>
+            </div>
+          </FadeIn>
 
           {/* Professional Headline — fluid font size */}
-          <div className="text-[clamp(1.75rem,5vw,3.75rem)] font-serif font-bold mb-[1.5vh] leading-[1.15] text-white tracking-tight drop-shadow-lg">
-            Your Trusted Legal <span className="text-amber-400">Partner</span>
-          </div>
+          <FadeIn delay={350} duration={1000} slideDistance={60} scaleFrom={0.88}>
+            <div className="text-[clamp(1.75rem,5vw,3.75rem)] font-serif font-bold mb-[1.5vh] leading-[1.15] text-white tracking-tight drop-shadow-lg">
+              Your Trusted Legal <span className="text-amber-400 inline-block hover-scale">Partner</span>
+            </div>
+          </FadeIn>
 
           {/* Description */}
-          <p className="text-[clamp(0.8rem,1.8vw,1.125rem)] text-white/90 mb-[1.5vh] md:mb-[3vh] max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
-            Practical, reliable, and result-oriented legal solutions founded on
-            the principles of fairness, diligence, responsiveness, and equity.
-          </p>
+          <FadeIn delay={550} duration={900}>
+            <p className="text-[clamp(0.8rem,1.8vw,1.125rem)] text-white/90 mb-[1.5vh] md:mb-[3vh] max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
+              Practical, reliable, and result-oriented legal solutions founded on
+              the principles of fairness, diligence, responsiveness, and equity.
+            </p>
+          </FadeIn>
 
           {/* CTA Buttons — percentage-based max-widths */}
-          <div className="flex flex-col sm:flex-row gap-[1.5vh] sm:gap-[2%] justify-center items-center max-w-[90%] sm:max-w-[70%] md:max-w-[60%] mx-auto">
-            <Link href="/appointments" className="w-full sm:w-1/2">
-              <button className="w-full py-[1.4vh] rounded-lg font-semibold text-[clamp(0.8rem,1.5vw,1rem)] text-white bg-amber-600 hover:bg-amber-700 transition-all duration-300 hover:shadow-lg active:scale-95 backdrop-blur-sm">
-                Schedule Consultation
-              </button>
-            </Link>
-            <Link href="/about" className="w-full sm:w-1/2">
-              <button className="w-full py-[1.4vh] rounded-lg font-semibold text-[clamp(0.8rem,1.5vw,1rem)] text-white border border-white/40 hover:border-amber-400/60 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
-                Learn More
-              </button>
-            </Link>
-          </div>
+          <FadeIn delay={750} duration={900} scaleFrom={0.9}>
+            <div className="flex flex-col sm:flex-row gap-[1.5vh] sm:gap-[2%] justify-center items-center max-w-[90%] sm:max-w-[70%] md:max-w-[60%] mx-auto">
+              <Link href="/appointments" className="w-full sm:w-1/2">
+                <button className="w-full py-[1.4vh] rounded-lg font-semibold text-[clamp(0.8rem,1.5vw,1rem)] text-white bg-amber-600 hover:bg-amber-700 transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 backdrop-blur-sm">
+                  Schedule Consultation
+                </button>
+              </Link>
+              <Link href="/about" className="w-full sm:w-1/2">
+                <button className="w-full py-[1.4vh] rounded-lg font-semibold text-[clamp(0.8rem,1.5vw,1rem)] text-white border border-white/40 hover:border-amber-400/60 hover:bg-white/10 hover:scale-105 transition-all duration-300 backdrop-blur-sm">
+                  Learn More
+                </button>
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </div>
 

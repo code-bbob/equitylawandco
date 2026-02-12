@@ -1,4 +1,6 @@
 import Link from "next/link";
+import ScrollFadeIn from "../components/ScrollFadeIn";
+import FadeIn from "../components/FadeIn";
 
 export const metadata = {
   title: 'About Us',
@@ -21,14 +23,18 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="bg-[url('/images/banner3.webp')] bg-cover bg-center text-white py-12 sm:py-20">
         <div className=" mx-auto px-4 sm:px-6 lg:px-44">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif mb-4 sm:mb-6">
-            About Equity Law & Co.
-          </h1>
-          <p className="text-base hidden md:block sm:text-xl text-amber-100 md:max-w-3xl">
-            With a legacy rooted in Sahara Law Chamber (est. 1998), we have grown through
-            decades of dedicated practice into a full-service law firm delivering practical,
-            reliable, and result-oriented legal solutions rooted in fairness and equity.
-          </p>
+          <FadeIn delay={100} duration={700} slideDistance={30}>
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif mb-4 sm:mb-6">
+              About Equity Law & Co.
+            </h1>
+          </FadeIn>
+          <FadeIn delay={300} duration={700}>
+            <p className="text-base hidden md:block sm:text-xl text-amber-100 md:max-w-3xl">
+              With a legacy rooted in Sahara Law Chamber (est. 1998), we have grown through
+              decades of dedicated practice into a full-service law firm delivering practical,
+              reliable, and result-oriented legal solutions rooted in fairness and equity.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
@@ -36,10 +42,11 @@ export default function AboutPage() {
       <section className="py-12 sm:py-20 bg-amber-50">
         <div className=" mx-auto px-4 sm:px-6 lg:px-24 xl:px-64">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-bold font-serif text-amber-900 mb-6">
-                Our History
-              </h2>
+            <ScrollFadeIn slideDistance={40}>
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-bold font-serif text-amber-900 mb-6">
+                  Our History
+                </h2>
               <p className="text-base sm:text-lg text-slate-700 mb-4 leading-relaxed">
                 Our professional journey began with the establishment of{" "}
                 <strong>Sahara Law Chamber in 1998 A.D.</strong>, which laid a
@@ -57,40 +64,42 @@ export default function AboutPage() {
               </p>
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
                 Throughout this journey of over two decades, we have maintained
-                our founding principle: law should not be merely applied but
                 applied equitably, taking into account the concept of fairness,
                 reasonableness, and the real-life circumstances of those seeking
                 justice.
               </p>
-            </div>
-            <div className="bg-amber-50 p-6 sm:p-8 rounded-lg border-2 border-amber-200">
-              <div className="space-y-6">
-                <div className="border-l-4 border-amber-700 pl-6">
-                  <div className="text-3xl font-bold text-amber-900">1998</div>
-                  <p className="text-slate-700 mt-2">
-                    Established as Sahara Law Chamber
-                  </p>
-                </div>
-                <div className="border-l-4 border-amber-700 pl-6">
-                  <div className="text-3xl font-bold text-amber-900">2014</div>
-                  <p className="text-slate-700 mt-2">
-                    Evolved into Equity Law Chamber
-                  </p>
-                </div>
-                <div className="border-l-4 border-amber-700 pl-6">
-                  <div className="text-3xl font-bold text-amber-900">2025</div>
-                  <p className="text-slate-700 mt-2">
-                    Restructured as Equity Law & Co.
-                  </p>
-                </div>
-                <div className="border-l-4 border-amber-700 pl-6">
-                  <div className="text-3xl font-bold text-amber-900">Today</div>
-                  <p className="text-slate-700 mt-2">
-                    27+ years of legal excellence
-                  </p>
+              </div>
+            </ScrollFadeIn>
+            <ScrollFadeIn slideDistance={40} duration={800}>
+              <div className="bg-amber-50 p-6 sm:p-8 rounded-lg border-2 border-amber-200">
+                <div className="space-y-6">
+                  <div className="border-l-4 border-amber-700 pl-6">
+                    <div className="text-3xl font-bold text-amber-900">1998</div>
+                    <p className="text-slate-700 mt-2">
+                      Established as Sahara Law Chamber
+                    </p>
+                  </div>
+                  <div className="border-l-4 border-amber-700 pl-6">
+                    <div className="text-3xl font-bold text-amber-900">2014</div>
+                    <p className="text-slate-700 mt-2">
+                      Evolved into Equity Law Chamber
+                    </p>
+                  </div>
+                  <div className="border-l-4 border-amber-700 pl-6">
+                    <div className="text-3xl font-bold text-amber-900">2025</div>
+                    <p className="text-slate-700 mt-2">
+                      Restructured as Equity Law & Co.
+                    </p>
+                  </div>
+                  <div className="border-l-4 border-amber-700 pl-6">
+                    <div className="text-3xl font-bold text-amber-900">Today</div>
+                    <p className="text-slate-700 mt-2">
+                      27+ years of legal excellence
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollFadeIn>
           </div>
         </div>
       </section>
