@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function AttorneyFilterHome({ attorneys, practiceAreas }) {
   const [selectedFilter, setSelectedFilter] = useState('ALL PRACTICE AREAS');
@@ -36,7 +37,7 @@ export default function AttorneyFilterHome({ attorneys, practiceAreas }) {
       {filteredAttorneys.length > 0 ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
-            {filteredAttorneys.map((attorney) => (
+            {filteredAttorneys.map((attorney, idx) => (
               <a
                 key={attorney.id}
                 href={`/attorneys/${attorney.slug}`}
@@ -45,10 +46,13 @@ export default function AttorneyFilterHome({ attorneys, practiceAreas }) {
                 {/* Image Container */}
                 <div className="relative h-[50vh] sm:h-[40vh] bg-gray-100 overflow-hidden">
                   {attorney.photo_url ? (
-                    <img 
+                    <Image 
                       src={attorney.photo_url} 
                       alt={attorney.full_name}
-                      className="w-full h-full object-cover object-[50%_10%] transition-transform duration-500 group-hover:scale-105"
+                      fill
+                      className="object-cover object-[50%_10%] transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      priority={idx < 4}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">

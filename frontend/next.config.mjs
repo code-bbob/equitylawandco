@@ -9,9 +9,10 @@ const nextConfig = {
         pathname: '/media/**',
       },
     ],
-    unoptimized: process.env.NODE_ENV === 'development',
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 2678400, // 31 days - images are already cached locally
+    deviceSizes: [640, 750, 828, 1080, 1200],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 };
 

@@ -39,7 +39,7 @@ export default function AttorneyFilterPage({ attorneys, practiceAreas }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
           {filteredAttorneys.map((attorney, idx) => (
             <div key={attorney.id} style={{transitionDelay: `${idx * 50}ms`}} className="animate-fade-in">
-              <AttorneyCard attorney={attorney} />
+              <AttorneyCard attorney={attorney} priority={idx < 4} />
             </div>
           ))}
         </div>

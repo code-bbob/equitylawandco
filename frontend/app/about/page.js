@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export const metadata = {
   title: 'About Us',
-  description: 'Equity Law & Co. is a full-service law firm in Nepal established in 2014, dedicated to delivering practical, reliable, and result-oriented legal solutions rooted in fairness and equity.',
-  keywords: 'about Equity Law, law firm Nepal, legal services Kathmandu, Nepal lawyers, Equity Law history',
+  description: 'Equity Law & Co. traces its roots to Sahara Law Chamber (est. 1998), evolved through Equity Law Chamber (2014), and was restructured in 2025 — delivering practical, reliable, and result-oriented legal solutions rooted in fairness and equity.',
+  keywords: 'about Equity Law, law firm Nepal, legal services Kathmandu, Nepal lawyers, Equity Law history, Sahara Law Chamber',
   openGraph: {
     title: 'About Equity Law & Co.',
-    description: 'A full-service law firm in Nepal dedicated to delivering practical, reliable, and result-oriented legal solutions.',
+    description: 'With roots dating back to 1998, Equity Law & Co. is a full-service law firm in Nepal delivering practical, reliable, and result-oriented legal solutions.',
     url: 'https://equitylawandco.com/about',
     type: 'website',
   },
@@ -25,9 +25,9 @@ export default function AboutPage() {
             About Equity Law & Co.
           </h1>
           <p className="text-base hidden md:block sm:text-xl text-amber-100 md:max-w-3xl">
-            A full-service law firm in Nepal dedicated to delivering practical,
-            reliable, and result-oriented legal solutions rooted in fairness and
-            equity.
+            With a legacy rooted in Sahara Law Chamber (est. 1998), we have grown through
+            decades of dedicated practice into a full-service law firm delivering practical,
+            reliable, and result-oriented legal solutions rooted in fairness and equity.
           </p>
         </div>
       </section>
@@ -41,22 +41,24 @@ export default function AboutPage() {
                 Our History
               </h2>
               <p className="text-base sm:text-lg text-slate-700 mb-4 leading-relaxed">
-                Equity Law & Co. was established in <strong>2014 A.D.</strong>{" "}
-                as "Equity Law Chamber," beginning as a specialized legal
-                practice committed to providing expert counsel across various
-                practice areas.
+                Our professional journey began with the establishment of{" "}
+                <strong>Sahara Law Chamber in 1998 A.D.</strong>, which laid a
+                strong foundation for our legal practice. Building upon this
+                experience and institutional growth,{" "}
+                <strong>Equity Law Chamber</strong> was formally established in{" "}
+                <strong>2014 A.D.</strong>
               </p>
               <p className="text-base sm:text-lg text-slate-700 mb-4 leading-relaxed">
-                In <strong>2025 A.D.</strong>, the firm underwent strategic
-                restructuring to become "Equity Law & Co.," reflecting its
-                institutional growth, expanded service offerings, and
-                institutional strength. This transformation marks our commitment
-                to serving clients with even greater expertise and resources.
+                Further reflecting our expansion, diversified services, and
+                renewed commitment to professional excellence, the firm was
+                restructured in <strong>2025 A.D.</strong> as{" "}
+                <strong>Equity Law & Co.</strong> — marking a new chapter of
+                institutional strength and broader service offerings.
               </p>
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-                Throughout our journey, we have maintained our founding
-                principle: law should not be merely applied but applied
-                equitably, taking into account the concept of fairness,
+                Throughout this journey of over two decades, we have maintained
+                our founding principle: law should not be merely applied but
+                applied equitably, taking into account the concept of fairness,
                 reasonableness, and the real-life circumstances of those seeking
                 justice.
               </p>
@@ -64,9 +66,15 @@ export default function AboutPage() {
             <div className="bg-amber-50 p-6 sm:p-8 rounded-lg border-2 border-amber-200">
               <div className="space-y-6">
                 <div className="border-l-4 border-amber-700 pl-6">
+                  <div className="text-3xl font-bold text-amber-900">1998</div>
+                  <p className="text-slate-700 mt-2">
+                    Established as Sahara Law Chamber
+                  </p>
+                </div>
+                <div className="border-l-4 border-amber-700 pl-6">
                   <div className="text-3xl font-bold text-amber-900">2014</div>
                   <p className="text-slate-700 mt-2">
-                    Founded as Equity Law Chamber
+                    Evolved into Equity Law Chamber
                   </p>
                 </div>
                 <div className="border-l-4 border-amber-700 pl-6">
@@ -78,7 +86,7 @@ export default function AboutPage() {
                 <div className="border-l-4 border-amber-700 pl-6">
                   <div className="text-3xl font-bold text-amber-900">Today</div>
                   <p className="text-slate-700 mt-2">
-                    Serving clients with distinction
+                    27+ years of legal excellence
                   </p>
                 </div>
               </div>

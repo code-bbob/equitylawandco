@@ -93,7 +93,6 @@ export default async function AttorneyDetailsPage({ params }) {
                     fill
                     className="object-cover object-[50%_10%] rounded-lg shadow-xl"
                     priority
-                    unoptimized
                     sizes="(max-width: 1024px) 288px, 384px"
                   />
                 </div>

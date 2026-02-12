@@ -55,13 +55,19 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             <div>
               <span className="text-xs font-semibold text-amber-700 tracking-widest uppercase">About Equity Law & Co.</span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-slate-900 mt-3 mb-6 md:mb-8 leading-tight">Founded on<br/><span className="text-amber-700">Principles of Equity</span></h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-slate-900 mt-3 mb-6 md:mb-8 leading-tight">A Legacy Rooted in<br/><span className="text-amber-700">Principles of Equity</span></h2>
               <ul className="space-y-4 text-slate-700">
                 <li className="flex items-start">
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
                     <span className="text-white text-sm font-bold">✓</span>
                   </div>
-                  <span className="text-base leading-relaxed">Established in 2014 A.D., restructured in 2025 A.D.</span>
+                  <span className="text-base leading-relaxed">Roots in Sahara Law Chamber, established in 1998 A.D.</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-base leading-relaxed">Evolved into Equity Law Chamber in 2014, restructured as Equity Law & Co. in 2025</span>
                 </li>
                 <li className="flex items-start">
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
@@ -73,7 +79,7 @@ export default async function Home() {
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
                     <span className="text-white text-sm font-bold">✓</span>
                   </div>
-                  <span className="text-base leading-relaxed">Practical, reliable, and result-oriented solutions</span>
+                  <span className="text-base leading-relaxed">Practical, reliable, and result-oriented legal solutions</span>
                 </li>
                 <li className="flex items-start">
                   <div className="h-6 w-6 rounded-full bg-amber-700 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
@@ -92,9 +98,9 @@ export default async function Home() {
             <div className="bg-amber-700 h-64 md:h-96 rounded-lg shadow-md flex items-center justify-center text-white text-center relative overflow-hidden">
               <div className="absolute inset-0 opacity-10"><div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 1px)', backgroundSize: '50px 50px'}}></div></div>
               <div className="relative z-10">
-                <div className="text-5xl md:text-6xl font-bold mb-3">10+</div>
-                <div className="text-lg font-normal">Years of Service</div>
-                <div className="text-sm text-amber-100 mt-4">Established 2014, Leading Since 2025</div>
+                <div className="text-5xl md:text-6xl font-bold mb-3">27+</div>
+                <div className="text-lg font-normal">Years of Legal Practice</div>
+                <div className="text-sm text-amber-100 mt-4">Since Sahara Law Chamber, 1998</div>
               </div>
             </div>
           </div>

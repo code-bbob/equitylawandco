@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
-export default function AttorneyCard({ attorney }) {
+export default function AttorneyCard({ attorney, priority = false }) {
   const { slug, full_name, job_title, photo_url } = attorney;
   
   // Pastel color rotation for card backgrounds
@@ -27,10 +28,14 @@ export default function AttorneyCard({ attorney }) {
         <div className="mb-6 flex justify-center relative z-10">
           <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:shadow-xl transition-shadow">
             {photo_url ? (
-              <img
+              <Image
                 src={photo_url}
                 alt={full_name}
+                width={192}
+                height={192}
                 className="w-full h-full object-cover object-[50%_10%] rounded-lg shadow-xl group-hover:scale-110 transition-transform duration-300"
+                sizes="(max-width: 640px) 144px, 192px"
+                priority={priority}
               />
             ) : (
               <div className="w-full h-full bg-slate-300 flex items-center justify-center">
