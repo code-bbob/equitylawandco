@@ -8,6 +8,11 @@ const nextConfig = {
         port: process.env.NEXT_PUBLIC_API_PORT || '8000',
         pathname: '/media/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'equitylawandco.pythonanywhere.com',
+        pathname: '/media/**',
+      },
       // {
       //   protocol: 'https',
       //   hostname: 'digitech-ecommerce.blr1.digitaloceanspaces.com',
