@@ -8,11 +8,11 @@ const nextConfig = {
         port: process.env.NEXT_PUBLIC_API_PORT || '8000',
         pathname: '/media/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'digitech-ecommerce.blr1.digitaloceanspaces.com',
-        pathname: '/equitylawandco/attorneys/**',
-      },
+      // {
+      //   protocol: 'https',
+      //   hostname: 'digitech-ecommerce.blr1.digitaloceanspaces.com',
+      //   pathname: '/equitylawandco/attorneys/**',
+      // },
     ],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 2678400, // 31 days - images are already cached locally
