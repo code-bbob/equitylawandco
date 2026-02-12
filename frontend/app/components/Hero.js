@@ -30,7 +30,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         {/* Mobile image */}
         <Image
-          src="/images/equitycoververtical.jpg"
+          src="/images/mobile3.jpg"
           alt="Equity Law & Co. attorneys"
           fill
           priority
@@ -48,7 +48,7 @@ export default function Hero() {
           className="object-cover object-[center_30%] hidden md:block"
           onLoad={() => setImagesLoaded((c) => c + 1)}
         />
-        <div className="absolute inset-0 md:hidden bg-slate-700/90 mix-blend-multiply"></div>
+        <div className="absolute inset-0 md:hidden bg-slate-300/100 mix-blend-multiply"></div>
 
         {/* Gradient overlay — stronger at bottom where text sits */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60"></div>
@@ -56,12 +56,12 @@ export default function Hero() {
 
       {/* Content — pinned to bottom with percentage-based spacing */}
       <div
-        className="relative z-10 w-full text-center px-[5%] pb-[18vh] md:pb-[8%]"
+        className="relative z-10 w-full text-center px-[5%] pb-[10vh] md:pb-[8%]"
       >
         <div className="max-w-4xl mx-auto">
           {/* Refined Badge */}
-          <div className="mb-[1vh] md:mb-[2vh] inline-block">
-            <span className="text-[clamp(0.625rem,1.2vw,0.75rem)] font-semibold text-amber-400 tracking-[0.15em] uppercase bg-black/30 py-[0.5em] px-[1em] rounded-lg backdrop-blur-md border border-amber-500/30 transition-all duration-300">
+          <div className="mb-[2vh] md:mb-[2vh] inline-block">
+            <span className="text-[clamp(0.625rem,1.2vw,0.75rem)]  font-semibold text-amber-400 tracking-[0.15em] uppercase bg-black/30 py-[0.5em] px-[1em] rounded-lg backdrop-blur-md border border-amber-500/30 transition-all duration-300">
               Excellence in Legal Services
             </span>
           </div>

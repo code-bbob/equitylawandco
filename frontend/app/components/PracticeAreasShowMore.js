@@ -10,6 +10,21 @@ export default function PracticeAreasShowMore({ practiceAreas }) {
   const initialDisplay = 6;
   const displayedAreas = showMore ? practiceAreas : practiceAreas.slice(0, initialDisplay);
 
+  // Helper function to strip HTML and truncate description
+  const getPlainTextDescription = (htmlDescription, maxLength = 150) => {
+    if (!htmlDescription) return 'Expert legal services tailored to your needs.';
+    
+    // Strip HTML tags
+    const plainText = htmlDescription.replace(/<[^>]*>/g, '');
+    
+    // Truncate to maxLength and add ellipsis if needed
+    if (plainText.length > maxLength) {
+      return plainText.substring(0, maxLength).trim() + '...';
+    }
+    
+    return plainText;
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -35,7 +50,7 @@ export default function PracticeAreasShowMore({ practiceAreas }) {
               
               {/* Description */}
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4 sm:mb-6 flex-grow">
-                Navigating complex legal challenges with strategic insight and unwavering dedication to protect your interests and achieve optimal outcomes.
+                {getPlainTextDescription(area.description)}
               </p>
               
               {/* Learn More Link */}
