@@ -7,7 +7,7 @@ export const siteMetadata = {
   titleTemplate: '%s | Equity Law & Co.',
   description: 'Equity Law & Co. is a full-service law firm in Kathmandu, Nepal providing practical, reliable, and result-oriented legal solutions in Intellectual Property, Real Estate, Arbitration, Corporate Law, and more.',
   keywords: 'law firm Nepal, legal services Kathmandu, attorneys Nepal, corporate law, intellectual property law, real estate law, arbitration, Equity Law, equity law and co, equity law chamber',
-  ogImage: `${baseUrl}/images/equitycover.jpg`,
+  ogImage: `${baseUrl}/images/og-image.jpg`,
 };
 
 export function generateOrganizationSchema() {
@@ -20,7 +20,7 @@ export function generateOrganizationSchema() {
     description: 'A full-service law firm in Nepal dedicated to delivering practical, reliable, and result-oriented legal solutions rooted in fairness and equity. Established in 2014 A.D., restructured in 2025 A.D.',
     url: baseUrl,
     logo: `${baseUrl}/images/image.svg`,
-    image: `${baseUrl}/images/equitycover.jpg`,
+    image: `${baseUrl}/images/og-image.jpg`,
     sameAs: [
       'https://www.facebook.com/equitylawandco',
       'https://www.linkedin.com/company/equitylawandco',

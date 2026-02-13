@@ -39,7 +39,7 @@ export async function generateMetadata({ params }) {
         height: 630,
         alt: attorney.full_name,
       }] : [{
-        url: `${baseUrl}/images/equitycover.jpg`,
+        url: `${baseUrl}/images/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: 'Equity Law & Co.',
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: `${attorney.full_name} - ${attorney.job_title} | Equity Law & Co.`,
       description: attorney.short_bio || `${attorney.full_name} is a ${attorney.job_title} at Equity Law & Co.`,
-      images: attorney.photo_url ? [attorney.photo_url] : [`${baseUrl}/images/equitycover.jpg`],
+      images: attorney.photo_url ? [attorney.photo_url] : [`${baseUrl}/images/og-image.jpg`],
     },
     alternates: {
       canonical: `${baseUrl}/attorneys/${attorney.slug}`,

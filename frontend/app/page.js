@@ -11,7 +11,7 @@ export const metadata = {
   title: 'Home',
   openGraph: {
     images: [{
-      url: `${baseUrl}/images/equitycover.jpg`,
+      url: `${baseUrl}/images/og-image.jpg`,
       width: 1200,
       height: 630,
       alt: 'Equity Law & Co.',

@@ -14,7 +14,7 @@ export const metadata = {
     type: 'website',
     siteName: 'Equity Law & Co.',
     images: [{
-      url: `${baseUrl}/images/equitycover.jpg`,
+      url: `${baseUrl}/images/og-image.jpg`,
       width: 1200,
       height: 630,
       alt: 'Equity Law & Co. - About Us',
@@ -24,7 +24,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'About Equity Law & Co.',
     description: 'With roots dating back to 1998, Equity Law & Co. is a full-service law firm in Nepal delivering practical, reliable, and result-oriented legal solutions.',
-    images: [`${baseUrl}/images/equitycover.jpg`],
+    images: [`${baseUrl}/images/og-image.jpg`],
   },
   alternates: {
     canonical: `${baseUrl}/about`,

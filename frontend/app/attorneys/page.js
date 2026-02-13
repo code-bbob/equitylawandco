@@ -14,7 +14,7 @@ export const metadata = {
     type: 'website',
     siteName: 'Equity Law & Co.',
     images: [{
-      url: `${baseUrl}/images/equitycover.jpg`,
+      url: `${baseUrl}/images/og-image.jpg`,
       width: 1200,
       height: 630,
       alt: 'Equity Law & Co. - Our Attorneys',
@@ -24,7 +24,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Our Attorneys | Equity Law & Co.',
     description: 'Meet the experienced attorneys at Equity Law & Co. Our team of legal professionals specializes in Intellectual Property, Real Estate, Corporate Law, and more.',
-    images: [`${baseUrl}/images/equitycover.jpg`],
+    images: [`${baseUrl}/images/og-image.jpg`],
   },
   alternates: {
     canonical: `${baseUrl}/attorneys`,

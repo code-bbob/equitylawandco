@@ -42,7 +42,7 @@ export async function generateMetadata({ params }) {
         height: 630,
         alt: blog.title,
       }] : [{
-        url: `${baseUrl}/images/equitycover.jpg`,
+        url: `${baseUrl}/images/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: 'Equity Law & Co.',
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: `${blog.title} | Equity Law & Co.`,
       description: blog.excerpt || blog.title,
-      images: blog.featured_image ? [blog.featured_image] : [`${baseUrl}/images/equitycover.jpg`],
+      images: blog.featured_image ? [blog.featured_image] : [`${baseUrl}/images/og-image.jpg`],
       creator: '@equitylawandco',
     },
     alternates: {

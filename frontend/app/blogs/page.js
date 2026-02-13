@@ -16,7 +16,7 @@ export const metadata = {
     type: 'website',
     siteName: 'Equity Law & Co.',
     images: [{
-      url: `${baseUrl}/images/equitycover.jpg`,
+      url: `${baseUrl}/images/og-image.jpg`,
       width: 1200,
       height: 630,
       alt: 'Equity Law & Co. - Legal Insights',
@@ -26,7 +26,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Legal Insights & News | Equity Law & Co.',
     description: 'Stay informed with the latest legal insights, articles, and news from Equity Law & Co.',
-    images: [`${baseUrl}/images/equitycover.jpg`],
+    images: [`${baseUrl}/images/og-image.jpg`],
   },
   alternates: {
     canonical: `${baseUrl}/blogs`,
