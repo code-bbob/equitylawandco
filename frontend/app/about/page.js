@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ScrollFadeIn from "../components/ScrollFadeIn";
 import FadeIn from "../components/FadeIn";
+import { baseUrl } from '@/lib/seo';
 
 export const metadata = {
   title: 'About Us',
@@ -9,11 +10,11 @@ export const metadata = {
   openGraph: {
     title: 'About Equity Law & Co.',
     description: 'With roots dating back to 1998, Equity Law & Co. is a full-service law firm in Nepal delivering practical, reliable, and result-oriented legal solutions.',
-    url: 'https://equitylawandco.com/about',
+    url: `${baseUrl}/about`,
     type: 'website',
     siteName: 'Equity Law & Co.',
     images: [{
-      url: 'https://equitylawandco.com/images/equitycover.jpg',
+      url: `${baseUrl}/images/equitycover.jpg`,
       width: 1200,
       height: 630,
       alt: 'Equity Law & Co. - About Us',
@@ -23,10 +24,10 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'About Equity Law & Co.',
     description: 'With roots dating back to 1998, Equity Law & Co. is a full-service law firm in Nepal delivering practical, reliable, and result-oriented legal solutions.',
-    images: ['https://equitylawandco.com/images/equitycover.jpg'],
+    images: [`${baseUrl}/images/equitycover.jpg`],
   },
   alternates: {
-    canonical: 'https://equitylawandco.com/about',
+    canonical: `${baseUrl}/about`,
   },
 };
 

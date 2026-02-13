@@ -1,13 +1,13 @@
 // SEO Utilities for structured data and metadata
 
-export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://equitylawandco.com';
+export const baseUrl = 'https://www.equitylawandco.com';
 
 export const siteMetadata = {
   title: 'Equity Law & Co.',
   titleTemplate: '%s | Equity Law & Co.',
   description: 'Equity Law & Co. is a full-service law firm in Kathmandu, Nepal providing practical, reliable, and result-oriented legal solutions in Intellectual Property, Real Estate, Arbitration, Corporate Law, and more.',
   keywords: 'law firm Nepal, legal services Kathmandu, attorneys Nepal, corporate law, intellectual property law, real estate law, arbitration, Equity Law, equity law and co, equity law chamber',
-  ogImage: `https://equitylawandco.com/images/equitycover.jpg`,
+  ogImage: `${baseUrl}/images/equitycover.jpg`,
 };
 
 export function generateOrganizationSchema() {
@@ -19,8 +19,8 @@ export function generateOrganizationSchema() {
     alternateName: 'Equity Law Chamber',
     description: 'A full-service law firm in Nepal dedicated to delivering practical, reliable, and result-oriented legal solutions rooted in fairness and equity. Established in 2014 A.D., restructured in 2025 A.D.',
     url: baseUrl,
-    logo: `https://equitylawandco.com/images/image.svg`,
-    image: `https://equitylawandco.com/images/equitycover.jpg`,
+    logo: `${baseUrl}/images/image.svg`,
+    image: `${baseUrl}/images/equitycover.jpg`,
     sameAs: [
       'https://www.facebook.com/equitylawandco',
       'https://www.linkedin.com/company/equitylawandco',
@@ -109,7 +109,7 @@ export function generateBlogSchema(blog) {
       name: 'Equity Law & Co.',
       logo: {
         '@type': 'ImageObject',
-        url: `https://equitylawandco.com/images/image.svg`,
+        url: `${baseUrl}/images/image.svg`,
       },
     },
     mainEntityOfPage: {
