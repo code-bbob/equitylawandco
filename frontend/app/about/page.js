@@ -11,6 +11,19 @@ export const metadata = {
     description: 'With roots dating back to 1998, Equity Law & Co. is a full-service law firm in Nepal delivering practical, reliable, and result-oriented legal solutions.',
     url: 'https://equitylawandco.com/about',
     type: 'website',
+    siteName: 'Equity Law & Co.',
+    images: [{
+      url: 'https://equitylawandco.com/images/equitycover.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'Equity Law & Co. - About Us',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Equity Law & Co.',
+    description: 'With roots dating back to 1998, Equity Law & Co. is a full-service law firm in Nepal delivering practical, reliable, and result-oriented legal solutions.',
+    images: ['https://equitylawandco.com/images/equitycover.jpg'],
   },
   alternates: {
     canonical: 'https://equitylawandco.com/about',

@@ -32,7 +32,24 @@ export async function generateMetadata({ params }) {
       description: attorney.short_bio || `${attorney.full_name} is a ${attorney.job_title} at Equity Law & Co.`,
       url: `${baseUrl}/attorneys/${attorney.slug}`,
       type: 'profile',
-      images: attorney.photo_url ? [{ url: attorney.photo_url, alt: attorney.full_name }] : [],
+      siteName: 'Equity Law & Co.',
+      images: attorney.photo_url ? [{
+        url: attorney.photo_url,
+        width: 1200,
+        height: 630,
+        alt: attorney.full_name,
+      }] : [{
+        url: `${baseUrl}/images/equitycover.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Equity Law & Co.',
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${attorney.full_name} - ${attorney.job_title} | Equity Law & Co.`,
+      description: attorney.short_bio || `${attorney.full_name} is a ${attorney.job_title} at Equity Law & Co.`,
+      images: attorney.photo_url ? [attorney.photo_url] : [`${baseUrl}/images/equitycover.jpg`],
     },
     alternates: {
       canonical: `${baseUrl}/attorneys/${attorney.slug}`,
@@ -84,20 +101,20 @@ export default async function AttorneyDetailsPage({ params }) {
         <div className="mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
           <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 items-start">
             {/* Left - Small Square Image */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 w-full sm:w-auto">
               {attorney.photo_url ? (
-                <div className="relative w-full sm:w-72 h-72 lg:w-96 lg:h-96">
+                <div className="relative w-full sm:w-72 h-72 lg:w-96 lg:h-96 mx-auto sm:mx-0">
                   <Image
                     src={attorney.photo_url}
                     alt={attorney.full_name}
                     fill
                     className="object-cover object-[50%_10%] rounded-lg shadow-xl"
                     priority
-                    sizes="(max-width: 1024px) 288px, 384px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 288px, 384px"
                   />
                 </div>
               ) : (
-                <div className="w-full sm:w-72 h-72 lg:w-80 lg:h-80 bg-gradient-to-br from-slate-100 to-slate-50 rounded-lg flex items-center justify-center shadow-xl">
+                <div className="w-full sm:w-72 h-72 lg:w-80 lg:h-80 bg-gradient-to-br from-slate-100 to-slate-50 rounded-lg flex items-center justify-center shadow-xl mx-auto sm:mx-0">
                   <span className="text-8xl text-slate-300">👤</span>
                 </div>
               )}
@@ -133,7 +150,7 @@ export default async function AttorneyDetailsPage({ params }) {
                 {attorney.email && (
                   <a
                     href={`mailto:${attorney.email}`}
-                    className="inline-flex items-center gap-2 bg-amber-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-amber-800 transition-all shadow-lg"
+                    className="inline-flex w-56 items-center gap-2 bg-amber-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-amber-800 transition-all shadow-lg"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -169,13 +186,13 @@ export default async function AttorneyDetailsPage({ params }) {
 
       {/* Professional Background Section */}
       {attorney.professional_background && (
-          <div className="mx-auto px-4 sm:px-8 pb-10 lg:px-16 xl:px-24">
+          <div className="mx-auto px-6 sm:px-8 pb-10 lg:px-16 xl:px-24">
             <div className="max-w-5xl">
               <h2 className="text-3xl font-serif font-bold text-slate-900 mb-8">
                 Professional Background
               </h2>
               <div className="prose prose-lg max-w-none">
-                <p className="text-slate-700 leading-relaxed text-justify ">
+                <p className="text-slate-700 leading-relaxed  ">
                   {attorney.professional_background}
                 </p>
               </div>
@@ -185,7 +202,7 @@ export default async function AttorneyDetailsPage({ params }) {
       )}
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-20 bg-amber-700 relative overflow-hidden">
+      <section className="py-6 md:py-12 bg-[url('/images/banner3.webp')] bg-cover bg-center relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -195,8 +212,8 @@ export default async function AttorneyDetailsPage({ params }) {
           }}
         ></div>
 
-        <div className="mx-auto px-4 sm:px-8 lg:px-16 xl:px-24 text-center relative z-10">
-          <div className="max-w-3xl mx-auto">
+        <div className="mx-auto px-4 sm:px-8 lg:px-16 xl:px-24  relative z-10">
+          <div className=" mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white mb-6 leading-tight">
               Ready to Work Together?
             </h2>
@@ -204,7 +221,7 @@ export default async function AttorneyDetailsPage({ params }) {
               Get in touch with {attorney.full_name} to discuss how we can
               help with your legal needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 ">
               <a
                 href="/appointments"
                 className="inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold py-4 px-10 rounded-lg transition-all shadow-xl"

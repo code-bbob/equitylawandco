@@ -36,7 +36,24 @@ export async function generateMetadata({ params }) {
       description: plainDescription || `Expert ${area.name} legal services.`,
       url: `${baseUrl}/practice-areas/${area.slug}`,
       type: 'website',
-      images: area.featured_image_url ? [{ url: area.featured_image_url, alt: area.name }] : [],
+      siteName: 'Equity Law & Co.',
+      images: area.featured_image_url ? [{
+        url: area.featured_image_url,
+        width: 1200,
+        height: 630,
+        alt: area.name,
+      }] : [{
+        url: `${baseUrl}/images/equitycover.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Equity Law & Co.',
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${area.name} | Equity Law & Co.`,
+      description: plainDescription || `Expert ${area.name} legal services.`,
+      images: area.featured_image_url ? [area.featured_image_url] : [`${baseUrl}/images/equitycover.jpg`],
     },
     alternates: {
       canonical: `${baseUrl}/practice-areas/${area.slug}`,
@@ -146,7 +163,7 @@ export default async function PracticeAreaDetail({ params }) {
 
 
       {/* Main Content */}
-      <article className={`mx-auto px-4 sm:px-6 lg:px-44 ${area.featured_image_url ? 'py-8 sm:py-12' : 'py-10 sm:py-16'}`}>
+      <article className={`mx-auto px-6 sm:px-6 lg:px-44 ${area.featured_image_url ? 'py-8 sm:py-12' : 'py-10 sm:py-16'}`}>
           <ScrollFadeIn>
             <header className="mb-8 sm:mb-12">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-900 mb-4">{area.name}</h1>
@@ -223,12 +240,13 @@ export default async function PracticeAreaDetail({ params }) {
                 Our experienced team specializes in {area.name.toLowerCase()} and is ready to help you achieve the best possible outcome.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-amber-50 text-amber-900 hover:bg-white px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base">
+                <Link href="/appointments" className="bg-amber-50 text-amber-900 hover:bg-white px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base">
                   Schedule Consultation
-                </button>
-                <button className="border-2 border-amber-100 text-amber-50 hover:bg-amber-700 px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base">
-                  Call Us Now
-                </button>
+                </Link>
+                <a href="tel:+977-9841052926" className="bg-amber-600 text-amber-50 hover:bg-amber-700 px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base">
+                  Call (9841052926)
+                </a>
+              
               </div>
             </div>
           </div>

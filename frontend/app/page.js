@@ -4,7 +4,20 @@ import ContactForm from './components/ContactForm';
 import AttorneyFilterHome from './components/AttorneyFilterHome';
 import ScrollFadeIn from './components/ScrollFadeIn';
 import { fetchAttorneys } from '@/lib/api';
+import { baseUrl } from '@/lib/seo';
 import Link from 'next/link';
+
+export const metadata = {
+  title: 'Home',
+  openGraph: {
+    images: [{
+      url: `${baseUrl}/images/equitycover.jpg`,
+      width: 1200,
+      height: 630,
+      alt: 'Equity Law & Co.',
+    }],
+  },
+};
 
 export default async function Home() {
   const attorneys = await fetchAttorneys();
@@ -54,7 +67,7 @@ export default async function Home() {
 
       {/* About Section */}
       <section id="about" className="py-16 sm:py-24 md:py-48 bg-white">
-        <div className=" mx-auto px-4 sm:px-6 lg:px-24">
+        <div className=" mx-auto px-6 sm:px-6 lg:px-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             <ScrollFadeIn slideDistance={70} duration={1100}>
               <div>
@@ -134,7 +147,7 @@ export default async function Home() {
             <div className="lg:col-span-1 space-y-4">
               <div className="flex items-start space-x-4 pb-4 border-b border-amber-100">
                 <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 flex-shrink-0 mt-0.5">
-                  <span className="text-lg">✉</span>
+                  <span className="text-4xl">✉</span>
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-semibold text-slate-900 text-sm">Email</h3>

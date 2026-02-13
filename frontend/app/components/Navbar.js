@@ -41,9 +41,9 @@ export default function Navbar({ practiceAreas = [] }) {
                 className="object-contain relative z-10 transition-transform duration-300 group-hover:scale-105"
               />
             </div>
-            <div className="hidden sm:flex flex-col leading-snug">
-              <span className="text-lg sm:text-xl font-semibold text-slate-900 tracking-wide uppercase">Equity Law & Co.</span>
-              <span className="text-xs text-slate-500 ml-2 tracking-[0.2em] uppercase">Attorneys at Law</span>
+            <div className="flex flex-col leading-snug">
+              <span className="text-md sm:text-xl font-semibold text-slate-900 tracking-wide uppercase">Equity Law & Co.</span>
+              <span className="text-xs text-slate-500 md:ml-2 tracking-[0.2em] uppercase">Attorneys at Law</span>
             </div>
           </Link>
 
@@ -91,7 +91,7 @@ export default function Navbar({ practiceAreas = [] }) {
 
               {/* Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="absolute top-full left-2 mt-4 w-72 bg-orange-100 rounded-xl shadow-xl border border-slate-200 py-2 z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                <div className="absolute top-full left-2 mt-4 w-72 bg-white rounded-xl shadow-xl py-2 z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                   {practiceAreas.length === 0 ? (
                     <div className="px-6 py-4 text-slate-500 text-center text-sm">No practice areas available</div>
                   ) : (
@@ -190,7 +190,7 @@ export default function Navbar({ practiceAreas = [] }) {
             </button>
 
             {isMobileDropdownOpen && (
-              <div className="bg-orange-100 rounded-lg py-2 mx-3 border border-gray-400">
+              <div className="bg-white rounded-lg py-2 mx-3 ">
                 {practiceAreas.length === 0 ? (
                   <div className="px-6 py-4 text-slate-500 text-center text-sm">No practice areas available</div>
                 ) : (
@@ -202,7 +202,7 @@ export default function Navbar({ practiceAreas = [] }) {
                         setIsMobileDropdownOpen(false);
                         setIsMobileMenuOpen(false);
                       }}
-                      className="block px-6 py-3 text-slate-700 hover:text-slate-900 text-sm font-medium transition-all duration-200 border-l-2 border-transparent hover:border-slate-900 hover:bg-white"
+                      className="block px-6 py-3 text-slate-700 hover:text-slate-900 text-sm font-medium transition-all duration-200 border-l-2 border-transparent hover:border-slate-900 hover:bg-orange-100"
                     >
                       {area.name}
                     </Link>

@@ -8,7 +8,7 @@ export default async function PracticeAreasPreview() {
 
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-amber-50">
-      <div className="mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
+      <div className="mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
         {/* Header */}
         <ScrollFadeIn>
           <div className="mb-16">

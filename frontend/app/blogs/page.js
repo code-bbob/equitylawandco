@@ -14,6 +14,19 @@ export const metadata = {
     description: 'Stay informed with the latest legal insights, articles, and news from Equity Law & Co.',
     url: `${baseUrl}/blogs`,
     type: 'website',
+    siteName: 'Equity Law & Co.',
+    images: [{
+      url: `${baseUrl}/images/equitycover.jpg`,
+      width: 1200,
+      height: 630,
+      alt: 'Equity Law & Co. - Legal Insights',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Legal Insights & News | Equity Law & Co.',
+    description: 'Stay informed with the latest legal insights, articles, and news from Equity Law & Co.',
+    images: [`${baseUrl}/images/equitycover.jpg`],
   },
   alternates: {
     canonical: `${baseUrl}/blogs`,

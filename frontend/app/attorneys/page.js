@@ -12,6 +12,19 @@ export const metadata = {
     description: 'Meet the experienced attorneys at Equity Law & Co. Our team of legal professionals specializes in Intellectual Property, Real Estate, Corporate Law, and more.',
     url: `${baseUrl}/attorneys`,
     type: 'website',
+    siteName: 'Equity Law & Co.',
+    images: [{
+      url: `${baseUrl}/images/equitycover.jpg`,
+      width: 1200,
+      height: 630,
+      alt: 'Equity Law & Co. - Our Attorneys',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Our Attorneys | Equity Law & Co.',
+    description: 'Meet the experienced attorneys at Equity Law & Co. Our team of legal professionals specializes in Intellectual Property, Real Estate, Corporate Law, and more.',
+    images: [`${baseUrl}/images/equitycover.jpg`],
   },
   alternates: {
     canonical: `${baseUrl}/attorneys`,
