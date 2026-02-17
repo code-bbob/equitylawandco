@@ -16,7 +16,7 @@ export default async function PracticeAreasPreview() {
               <div className="max-w-3xl">
                 <span className="text-xs font-semibold text-amber-700 tracking-[0.2em] uppercase">Our Expertise</span>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-4 mb-5 leading-tight">
-                  Comprehensive Legal Representation<br className="hidden sm:block" />for Modern Challenges
+                  Comprehensive Legal Representation <br className="hidden sm:block" />for Modern Challenges
                 </h2>
                 <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
                   We provide sophisticated legal solutions tailored to your unique needs, combining decades of experience with innovative approaches to deliver exceptional results.
