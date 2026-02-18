@@ -136,13 +136,13 @@ def send_contact_email_async(name, email, message):
                             
                             <div class="contact-info">
                                 <div class="contact-item">
-                                    <span class="contact-label">📞 Phone:</span> (555) 123-4567
+                                    <span class="contact-label">📞 Phone:</span> (977) 9841052926
                                 </div>
                                 <div class="contact-item">
-                                    <span class="contact-label">📧 Email:</span> <a href="mailto:info@equitylaw.com" style="color: #B45309; text-decoration: none;">info@equitylaw.com</a>
+                                    <span class="contact-label">📧 Email:</span> <a href="mailto:contact@equitylawandco.com" style="color: #B45309; text-decoration: none;">contact@equitylawandco.com</a>
                                 </div>
                                 <div class="contact-item">
-                                    <span class="contact-label">📍 Office:</span> 123 Legal Ave, Suite 100
+                                    <span class="contact-label">📍 Office:</span> Thapagaun, Kathmandu, Nepal
                                 </div>
                             </div>
                             
@@ -155,7 +155,7 @@ def send_contact_email_async(name, email, message):
                             <div class="footer">
                                 <p>© 2025 Equity Law & Co. All rights reserved.<br>
                                 <a href="https://equitylawandco.com" style="color: #B45309; text-decoration: none;">Visit our website</a> | 
-                                <a href="mailto:info@equitylaw.com" style="color: #B45309; text-decoration: none;">Contact us</a></p>
+                                <a href="mailto:contact@equitylawandco.com" style="color: #B45309; text-decoration: none;">Contact us</a></p>
                             </div>
                         </div>
                     </div>
@@ -249,9 +249,9 @@ def send_appointment_confirmation_email(appointment):
                                 <p>Please have any relevant documents ready and be prepared to discuss your legal matter in detail. This will help us provide you with the best possible guidance.</p>
                                 
                                 <p><strong>Contact Information:</strong></p>
-                                <p>📞 Phone: (555) 123-4567<br>
-                                📧 Email: info@equitylaw.com<br>
-                                📍 Office: 123 Legal Ave, Suite 100</p>
+                                <p>📞 Phone: (977) 9841052926<br>
+                                📧 Email: contact@equitylawandco.com<br>
+                                📍 Office: Thapagaun, Kathmandu, Nepal</p>
                             </div>
                             
                             <div class="message">
